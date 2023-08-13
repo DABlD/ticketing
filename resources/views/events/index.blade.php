@@ -47,6 +47,8 @@
 @push('styles')
 	<link rel="stylesheet" href="{{ asset('css/datatables.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/datatables.bundle.min.css') }}">
+	      <link href='https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css' />
+
 	{{-- <link rel="stylesheet" href="{{ asset('css/datatables.bootstrap4.min.css') }}"> --}}
 	{{-- <link rel="stylesheet" href="{{ asset('css/datatables-jquery.min.css') }}"> --}}
 @endpush
@@ -54,6 +56,8 @@
 @push('scripts')
 	<script src="{{ asset('js/datatables.min.js') }}"></script>
 	<script src="{{ asset('js/datatables.bundle.min.js') }}"></script>
+        <script src="https://cdn.tiny.cloud/1/j6hjljyetenwq6iddgak38qqskvfp3f0c9mgqc68lj0rgzab/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
 	{{-- <script src="{{ asset('js/datatables.bootstrap4.min.js') }}"></script> --}}
 	{{-- <script src="{{ asset('js/datatables-jquery.min.js') }}"></script> --}}
 
@@ -134,7 +138,6 @@
 				title: "Enter Event Details",
 				html: `
 	                ${input("name", "Name", null, 3, 9)}
-					${input("description", "Description", null, 3, 9)}
 					${input("date", "Date", null, 3, 9)}
 					<div class="row iRow">
 			            <div class="col-md-3 iLabel">
@@ -150,6 +153,15 @@
 			        </div>
 					${input("venue", "Venue", null, 3, 9)}
 					${input("venue_address", "Address", null, 3, 9)}
+					<div class="row iRow">
+			            <div class="col-md-3 iLabel">
+			                Description
+			            </div>
+			            <div class="col-md-9 iInput">
+			                <textarea name="description" placeholder="Enter Description" class="form-control">
+			                </textarea>
+			            </div>
+			        </div>
 				`,
 				didOpen: () => {
 					$("[name='date']").flatpickr({
@@ -165,8 +177,14 @@
 					    altFormat: "h:i K",
 					    altInput: true
 					});
+
+					tinymce.init({
+				      	selector: 'textarea',
+				      	// toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | checklist numlist bullist indent outdent | emoticons charmap',
+				      	// tinycomments_mode: 'embedded',
+				    });
 				},
-				width: '800px',
+				width: '80%',
 				confirmButtonText: 'Create',
 				showCancelButton: true,
 				cancelButtonColor: errorColor,

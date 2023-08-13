@@ -29,7 +29,7 @@ class CreateEventsTable extends Migration
             $table->boolean('ticket')->default(0);
 
             $table->json('images')->nullable();
-            $table->enum('status', ['Upcoming', 'Finished'])->default('Upcoming');
+            $table->enum('status', ['Upcoming', 'Finished', 'Arranging', 'Cancelled'])->default('Arranging');
 
             $table->timestamps();
             $table->softDeletes();

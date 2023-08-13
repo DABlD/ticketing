@@ -214,8 +214,9 @@
 
 		function showDetails(event){
 			Swal.fire({
+				title: 'Event Details',
 				html: `
-	                ${input("id", "id", event.id, 3, 9, 'hidden')}
+	                ${input("id", "", event.id, 3, 9, 'hidden')}
 	                ${input("name", "Name", event.name, 3, 9)}
 					${input("description", "Description", event.description, 3, 9)}
 					${input("date", "Description", event.date, 3, 9)}

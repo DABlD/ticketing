@@ -4,6 +4,14 @@ let dateFormat = "YYYY-MM-DD";
 let dateFormat2 = "MMM DD, YYYY";
 let dateTimeFormat = "YYYY-MM-DD H:m:s";
 
+function toDate(timetamp){
+	return moment(timetamp).format('MMM DD, YYYY');
+}
+
+function toDateTime(timestamp){
+	return moment(timestamp).format('MMM. DD, YYYY h:mm A');	
+}
+
 function ss(title = "", text = ""){
 	Swal.fire({
 		icon: "success",
@@ -91,6 +99,20 @@ function dateTimeNow(){
 if($('.nav-link.active').parent().parent().has('.nav-treeview')){
 	$('.nav-link.active').parent().parent().show();
 	$('.nav-link.active').parent().parent().parent().addClass('menu-is-opening menu-open');
+}
+
+function checkbox(name, value, checked = ""){
+    return `
+        <input type="checkbox" name="${name}" value="${value}" ${checked}>
+        <label for="${name}">${value}</label><br>
+    `;
+}
+
+function radio(name, value, checked = ""){
+    return `
+        <input type="radio" name="${name}" value="${value}" ${checked}>
+        <label for="${name}">${value}</label><br>
+    `;
 }
 
 // REMOVE CLASS OF DATATABLE SEARCH BARS

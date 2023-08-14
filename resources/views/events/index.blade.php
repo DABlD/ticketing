@@ -158,7 +158,7 @@
 			                Description
 			            </div>
 			            <div class="col-md-9 iInput">
-			                <textarea name="description" placeholder="Enter Description" class="form-control">
+			                <textarea name="description" id="description" placeholder="Enter Description" class="form-control">
 			                </textarea>
 			            </div>
 			        </div>
@@ -212,12 +212,13 @@
 						type: "POST",
 						data: {
 							name: $("[name='name']").val(),
-							description: $("[name='description']").val(),
 							date: $("[name='date']").val(),
 							start_time: $("[name='start_time']").val(),
 							end_time: $("[name='end_time']").val(),
 							venue: $("[name='venue']").val(),
 							venue_address: $("[name='venue_address']").val(),
+
+							description: tinymce.get('description').getContent(),
 
 							_token: $('meta[name="csrf-token"]').attr('content')
 						},
@@ -227,6 +228,9 @@
 						}
 					})
 				}
+
+				// remove wysiwyg
+				tinymce.remove();
 			});
 		}
 
@@ -236,14 +240,22 @@
 				html: `
 	                ${input("id", "", event.id, 3, 9, 'hidden')}
 	                ${input("name", "Name", event.name, 3, 9)}
-					${input("description", "Description", event.description, 3, 9)}
 					${input("date", "Description", event.date, 3, 9)}
 					${input("start_time", "Start", event.start_time, 3, 9)}
 					${input("end_time", "End", event.end_time, 3, 9)}
 					${input("venue", "Venue", event.venue, 3, 9)}
 					${input("venue_address", "Address", event.venue_address, 3, 9)}
+					<div class="row iRow">
+			            <div class="col-md-3 iLabel">
+			                Description
+			            </div>
+			            <div class="col-md-9 iInput">
+			                <textarea name="description" id="description" placeholder="Enter Description" class="form-control">
+			                </textarea>
+			            </div>
+			        </div>
 				`,
-				width: '800px',
+				width: '80%',
 				confirmButtonText: 'Update',
 				showCancelButton: true,
 				cancelButtonColor: errorColor,
@@ -262,6 +274,16 @@
 					    altFormat: "h:i K",
 					    altInput: true
 					});
+
+					tinymce.init({
+				      	selector: 'textarea',
+				      	// toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | checklist numlist bullist indent outdent | emoticons charmap',
+				      	// tinycomments_mode: 'embedded',
+				    });
+
+				    setTimeout(() => {
+			    		tinymce.get('description').setContent(event.description);
+				    }, 500);
 				},
 				preConfirm: () => {
 				    swal.showLoading();
@@ -286,18 +308,21 @@
 						data: {
 							id: $("[name='id']").val(),
 							name: $("[name='name']").val(),
-							description: $("[name='description']").val(),
 							date: $("[name='date']").val(),
 							start_time: $("[name='start_time']").val(),
 							end_time: $("[name='end_time']").val(),
 							venue: $("[name='venue']").val(),
 							venue_address: $("[name='venue_address']").val(),
+							description: tinymce.get('description').getContent(),
 						},
 						message: "Success"
 					},	() => {
 						reload();
 					});
 				}
+
+				// remove wysiwyg
+				tinymce.remove();
 			});
 		}
 

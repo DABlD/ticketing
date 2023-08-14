@@ -47,6 +47,7 @@
 @push('styles')
 	<link rel="stylesheet" href="{{ asset('css/datatables.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/datatables.bundle.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/splide.min.css') }}">
 
 	{{-- <link rel="stylesheet" href="{{ asset('css/datatables.bootstrap4.min.css') }}"> --}}
 	{{-- <link rel="stylesheet" href="{{ asset('css/datatables-jquery.min.css') }}"> --}}
@@ -55,6 +56,7 @@
 @push('scripts')
 	<script src="{{ asset('js/datatables.min.js') }}"></script>
 	<script src="{{ asset('js/datatables.bundle.min.js') }}"></script>
+	<script src="{{ asset('js/splide.min.js') }}"></script>
     <script src="https://cdn.tiny.cloud/1/j6hjljyetenwq6iddgak38qqskvfp3f0c9mgqc68lj0rgzab/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 
 	{{-- <script src="{{ asset('js/datatables.bootstrap4.min.js') }}"></script> --}}
@@ -335,6 +337,61 @@
 						message: "Success"
 					}, () => {
 						reload();
+					})
+				}
+			});
+		}
+
+		function viewImages(id){
+			$.ajax({
+				url: '{{ route('event.get') }}',
+				data: {
+					select: "images",
+					where: ['id', id]
+				},
+				success: result => {
+					result = JSON.parse(result)[0];
+					
+					let imageString = ``;
+
+					if(result && result.images){
+						result.images.forEach(image => {
+							imageString = `
+								<li class="splide__slide">
+									<img src="{{ asset('${image}') }}" alt="Pic">
+								</li>
+							`;
+						});
+					}
+					else{
+						imageString = '<li class="splide__slide">No Images Uploaded</li>'
+					}
+
+					showImages(imageString);
+				}
+			})
+		}
+
+		function showImages(id, imageString){
+			Swal.fire({
+				title: "View Images",
+				showDenyButton: true,
+				denyButtonText: 'Upload Images',
+				denyButtonColor: successColor,
+				html: `
+					<div class="splide" role="group" aria-label="Splide Basic HTML Example">
+					  <div class="splide__track">
+							<ul class="splide__list">
+								${imageString}
+							</ul>
+					  </div>
+					</div>
+				`
+			}).then(result => {
+				if(result.isDenied){
+					Swal.fire({
+						title: "Upload Image/s",
+						input: "file"
 					})
 				}
 			});

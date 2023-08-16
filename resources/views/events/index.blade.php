@@ -47,7 +47,8 @@
 @push('styles')
 	<link rel="stylesheet" href="{{ asset('css/datatables.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/datatables.bundle.min.css') }}">
-	<link rel="stylesheet" href="{{ asset('css/splide.min.css') }}">
+	<!-- <link rel="stylesheet" href="{{ asset('css/splide.min.css') }}"> -->
+	<link rel="stylesheet" href="{{ asset('css/swiper.min.css') }}">
 
 	{{-- <link rel="stylesheet" href="{{ asset('css/datatables.bootstrap4.min.css') }}"> --}}
 	{{-- <link rel="stylesheet" href="{{ asset('css/datatables-jquery.min.css') }}"> --}}
@@ -57,6 +58,7 @@
 	<script src="{{ asset('js/datatables.min.js') }}"></script>
 	<script src="{{ asset('js/datatables.bundle.min.js') }}"></script>
 	<script src="{{ asset('js/splide.min.js') }}"></script>
+	<script src="{{ asset('js/swiper.min.js') }}"></script>
     <script src="https://cdn.tiny.cloud/1/j6hjljyetenwq6iddgak38qqskvfp3f0c9mgqc68lj0rgzab/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 
 	{{-- <script src="{{ asset('js/datatables.bootstrap4.min.js') }}"></script> --}}
@@ -373,20 +375,38 @@
 		}
 
 		function showImages(id, imageString){
+								// ${imageString}
 			Swal.fire({
 				title: "View Images",
 				showDenyButton: true,
 				denyButtonText: 'Upload Images',
 				denyButtonColor: successColor,
 				html: `
-					<div class="splide" role="group" aria-label="Splide Basic HTML Example">
-					  <div class="splide__track">
-							<ul class="splide__list">
-								${imageString}
-							</ul>
-					  </div>
-					</div>
-				`
+					<swiper-container class="mySwiper" pagination="true" pagination-clickable="true" space-between="30"
+					slides-per-view="3">
+						<swiper-slide>Slide 1</swiper-slide>
+						<swiper-slide>Slide 2</swiper-slide>
+						<swiper-slide>Slide 3</swiper-slide>
+						<swiper-slide>Slide 4</swiper-slide>
+						<swiper-slide>Slide 5</swiper-slide>
+						<swiper-slide>Slide 6</swiper-slide>
+						<swiper-slide>Slide 7</swiper-slide>
+						<swiper-slide>Slide 8</swiper-slide>
+						<swiper-slide>Slide 9</swiper-slide>
+					</swiper-container>
+				`,
+				didOpen: () => {
+					// new Splide( '.splide' ).mount();
+				    var swiper = new Swiper(".mySwiper", {
+				      slidesPerView: "auto",
+				      centeredSlides: true,
+				      spaceBetween: 30,
+				      pagination: {
+				        el: ".swiper-pagination",
+				        clickable: true,
+				      },
+				    });
+				}
 			}).then(result => {
 				if(result.isDenied){
 					Swal.fire({

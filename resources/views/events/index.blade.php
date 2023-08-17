@@ -415,6 +415,7 @@
   						type   : 'loop',
   						height: '100%',
   						width: '60%',
+						gap: '5em'
 					}).mount();
 				}
 			}).then(result => {
@@ -483,7 +484,7 @@
 				            // formData.append('images[]', $('.swal2-file').prop('files'));
 				            formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
 
-							uploadImages(formData, id, imageString);
+							uploadImages(formData, id);
 						}
 						// showImages(id, imageString);
 					});
@@ -504,13 +505,14 @@
 
 			$('.swal-height').css('height', '80vh');
 			new Splide( '.splide', {
-					type   : 'loop',
-					height: '100%',
-					width: '60%',
+				type   : 'loop',
+				height: '100%',
+				width: '60%',
+				gap: '5em'
 			}).mount();
 		}
 
-		async function uploadImages(formData, id, imageString){
+		async function uploadImages(formData, id){
 		    await fetch('{{ route('event.uploadImages') }}', {
 		        method: "POST", 
 		        body: formData,
@@ -519,6 +521,7 @@
 		        ss("Successfully Uploaded Files", "Refreshing");
 		        setTimeout(() => {
 		            // window.location.reload();
+		            viewImages(id);
 		        }, 1200);
 		    });
 		}

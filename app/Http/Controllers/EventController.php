@@ -7,6 +7,8 @@ use App\Models\Event;
 use DB;
 use Auth;
 
+use Image;
+
 class EventController extends Controller
 {
     public function __construct(){
@@ -69,6 +71,34 @@ class EventController extends Controller
 
     public function update(Request $req){
         echo DB::table($this->table)->where('id', $req->id)->update($req->except(['id', '_token']));
+    }
+
+    public function uploadImages(Request $req){
+        $files = $req->file();
+        $filenames = [];
+
+        foreach($files as $file){
+            $name = $file->getClientOriginalName();
+
+            $type = strtoupper($file->getClientOriginalExtension());
+
+            $img = Image::make($file);
+            $img->orientate();
+
+            $save_path = public_path().'/uploads/' . $req->id;
+
+            if (!file_exists($save_path)) {
+                mkdir($save_path, 666, true);
+            }
+
+            $img->save($save_path . '/' . $name);
+
+            array_push($filenames, $name);
+        }
+
+        $event = Event::find($req->id);
+        $event->images = json_encode($filenames);
+        echo $event->save();
     }
 
     public function delete(Request $req){

@@ -47,18 +47,31 @@
 @push('styles')
 	<link rel="stylesheet" href="{{ asset('css/datatables.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/datatables.bundle.min.css') }}">
-	<!-- <link rel="stylesheet" href="{{ asset('css/splide.min.css') }}"> -->
-	<link rel="stylesheet" href="{{ asset('css/swiper.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/splide.min.css') }}">
+	{{-- <link rel="stylesheet" href="{{ asset('css/swiper.min.css') }}"> --}}
 
 	{{-- <link rel="stylesheet" href="{{ asset('css/datatables.bootstrap4.min.css') }}"> --}}
 	{{-- <link rel="stylesheet" href="{{ asset('css/datatables-jquery.min.css') }}"> --}}
+
+	<style>
+		.splide__slide img {
+		  width: 100%;
+		  height: 100%;
+		  object-fit: cover;
+		}
+
+		.splide__list{
+			display : flex;
+			align-items : center;
+		}
+	</style>
 @endpush
 
 @push('scripts')
 	<script src="{{ asset('js/datatables.min.js') }}"></script>
 	<script src="{{ asset('js/datatables.bundle.min.js') }}"></script>
 	<script src="{{ asset('js/splide.min.js') }}"></script>
-	<script src="{{ asset('js/swiper.min.js') }}"></script>
+	{{-- <script src="{{ asset('js/swiper.min.js') }}"></script> --}}
     <script src="https://cdn.tiny.cloud/1/j6hjljyetenwq6iddgak38qqskvfp3f0c9mgqc68lj0rgzab/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 
 	{{-- <script src="{{ asset('js/datatables.bootstrap4.min.js') }}"></script> --}}
@@ -357,55 +370,52 @@
 					let imageString = ``;
 
 					if(result && result.images){
-						result.images.forEach(image => {
-							imageString = `
+						let images = JSON.parse(result.images);
+						images.forEach(image => {
+							imageString += `
 								<li class="splide__slide">
-									<img src="{{ asset('${image}') }}" alt="Pic">
+									<img src="uploads/${id}/${image}" alt="Pic">
 								</li>
 							`;
 						});
 					}
 					else{
-						imageString = '<li class="splide__slide">No Images Uploaded</li>'
+						imageString = `
+							<li class="splide__slide">
+								No Images Uploaded
+							</li>
+						`;
 					}
 
-					showImages(imageString);
+					showImages(id, imageString);
 				}
 			})
 		}
 
 		function showImages(id, imageString){
-								// ${imageString}
 			Swal.fire({
 				title: "View Images",
 				showDenyButton: true,
 				denyButtonText: 'Upload Images',
 				denyButtonColor: successColor,
+     			customClass: 'swal-height',
 				html: `
-					<swiper-container class="mySwiper" pagination="true" pagination-clickable="true" space-between="30"
-					slides-per-view="3">
-						<swiper-slide>Slide 1</swiper-slide>
-						<swiper-slide>Slide 2</swiper-slide>
-						<swiper-slide>Slide 3</swiper-slide>
-						<swiper-slide>Slide 4</swiper-slide>
-						<swiper-slide>Slide 5</swiper-slide>
-						<swiper-slide>Slide 6</swiper-slide>
-						<swiper-slide>Slide 7</swiper-slide>
-						<swiper-slide>Slide 8</swiper-slide>
-						<swiper-slide>Slide 9</swiper-slide>
-					</swiper-container>
+					<div class="splide" role="group" aria-label="Splide Basic HTML Example" style="margin: auto;">
+					  <div class="splide__track">
+							<ul class="splide__list">
+								${imageString}
+							</ul>
+					  </div>
+					</div>
 				`,
+				width: "100vh",
 				didOpen: () => {
-					// new Splide( '.splide' ).mount();
-				    var swiper = new Swiper(".mySwiper", {
-				      slidesPerView: "auto",
-				      centeredSlides: true,
-				      spaceBetween: 30,
-				      pagination: {
-				        el: ".swiper-pagination",
-				        clickable: true,
-				      },
-				    });
+					$('.swal-height').css('height', '80vh');
+					new Splide( '.splide', {
+  						type   : 'loop',
+  						height: '100%',
+  						width: '60%',
+					}).mount();
 				}
 			}).then(result => {
 				if(result.isDenied){
@@ -415,10 +425,102 @@
 						inputAttributes: {
 							'accept': 'image/*',
 							'multiple': 'multiple'
+						},
+						showCancelButton: true,
+						cancelButtonColor: errorColor,
+						confirmButtonText: "Upload",
+						preConfirm: () => {
+						    swal.showLoading();
+						    return new Promise(resolve => {
+						    	let bool = true;
+
+					            if($('.swal2-file').val().length == 0){
+					                Swal.showValidationMessage('No Image Selected');
+					            }
+					            else{
+					            	let bool = false;
+					            }
+
+					            bool ? setTimeout(() => {resolve()}, 500) : "";
+						    });
+						},
+						didOpen: () => {
+							$('.swal2-file').on('change', e => {
+								let fileInput = e.target;
+								let imageString2 = ``;
+
+								$('#swal2-html-container').show();
+								$('.swal2-modal').css('width', '100vh');
+
+								for (var i = 0; i < fileInput.files.length; i++) {
+									if (fileInput.files && fileInput.files[i]) {
+										var reader = new FileReader();
+										reader.onload = function(e) {
+											imageString2 += `
+												<li class="splide__slide">
+													<img src="${e.target.result}" alt="Pic">
+												</li>
+											`;
+
+											uploadFilePreview(imageString2);
+										};
+										reader.readAsDataURL(fileInput.files[i]);
+									}
+								}
+							});
 						}
-					})
+					}).then(result2 => {
+						if(result2.value){
+				            swal.showLoading();
+
+				            let formData = new FormData();
+				            formData.append('id', id);
+
+				            for (var i = 0; i < $('.swal2-file').prop('files').length; i++) {
+				            	formData.append(`images${i}`, $('.swal2-file').prop('files')[i]);
+				            	console.log($('.swal2-file').prop('files')[i]);
+				            }
+				            // formData.append('images[]', $('.swal2-file').prop('files'));
+				            formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+
+							uploadImages(formData, id, imageString);
+						}
+						// showImages(id, imageString);
+					});
 				}
 			});
+		}
+
+		function uploadFilePreview(imageString2){
+			$('#swal2-html-container').html(`
+				<div class="splide" role="group" aria-label="Splide Basic HTML Example" style="margin: auto;">
+				  <div class="splide__track">
+						<ul class="splide__list">
+							${imageString2}
+						</ul>
+				  </div>
+				</div>
+			`);
+
+			$('.swal-height').css('height', '80vh');
+			new Splide( '.splide', {
+					type   : 'loop',
+					height: '100%',
+					width: '60%',
+			}).mount();
+		}
+
+		async function uploadImages(formData, id, imageString){
+		    await fetch('{{ route('event.uploadImages') }}', {
+		        method: "POST", 
+		        body: formData,
+		    }).then(result => {
+		        console.log(result);
+		        ss("Successfully Uploaded Files", "Refreshing");
+		        setTimeout(() => {
+		            // window.location.reload();
+		        }, 1200);
+		    });
 		}
 	</script>
 @endpush

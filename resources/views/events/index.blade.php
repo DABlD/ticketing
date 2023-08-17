@@ -411,7 +411,11 @@
 				if(result.isDenied){
 					Swal.fire({
 						title: "Upload Image/s",
-						input: "file"
+						input: "file",
+						inputAttributes: {
+							'accept': 'image/*',
+							'multiple': 'multiple'
+						}
 					})
 				}
 			});

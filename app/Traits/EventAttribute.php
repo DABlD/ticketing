@@ -13,6 +13,9 @@ trait EventAttribute{
 		$action .= 	"<a class='btn btn-info' data-toggle='tooltip' title='Images' onClick='viewImages($id)'>" .
 				        "<i class='fas fa-images'></i>" .
 				    "</a>&nbsp;";
+		$action .= 	"<a class='btn btn-warning' data-toggle='tooltip' title='Tickets' onClick='viewTickets($id)'>" .
+				        "<i class='fas fa-ticket'></i>" .
+				    "</a>&nbsp;";
 		$action .= 	"<a class='btn btn-danger' data-toggle='tooltip' title='Delete' onClick='del($id)'>" .
 				        "<i class='fas fa-trash'></i>" .
 					    "</a>&nbsp;";

@@ -357,6 +357,7 @@
 			});
 		}
 
+		// IMAGES
 		function viewImages(id){
 			$.ajax({
 				url: '{{ route('event.get') }}',
@@ -524,6 +525,21 @@
 		            viewImages(id);
 		        }, 1200);
 		    });
+		}
+
+		// TICKETS
+		function viewTickets(id){
+			$.ajax({
+				url: '{{ route('event.get') }}',
+				data: {
+					select: 'ticket',
+					where: ['id', id]
+				},
+				success: result => {
+					result = JSON.parse(result)[0];
+					console.log(result);
+				}
+			})
 		}
 	</script>
 @endpush

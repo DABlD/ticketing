@@ -25,7 +25,7 @@
                     				<th>Venue</th>
                     				<th>Date</th>
                     				<th>Time</th>
-                    				<th>Ticket</th>
+                    				<th>Tickets</th>
                     				<th>Status</th>
                     				<th>Actions</th>
                     			</tr>
@@ -116,13 +116,14 @@
 						targets: [5],
 						render: ticket => {
 							let string = "";
-							if(ticket){
+
+							if(ticket == null){
+								string = "NOT SET"
+							}
+							else if(ticket){
 								string = `
 									BTN
 								`;
-							}
-							else{
-								string = "FREE";
 							}
 
 							return string;
@@ -536,8 +537,54 @@
 					where: ['id', id]
 				},
 				success: result => {
-					result = JSON.parse(result)[0];
-					console.log(result);
+					result = JSON.parse(result)[0].ticket;
+					let ticketString = "";
+					let checked = "";
+					
+					if(result == null){
+						ticketString = `
+							<tr>
+								<td colspan="3">NOT SET</td>
+							</tr>
+						`;
+					}
+					else{
+						let tickets = getTickets(id);
+					}
+
+
+					Swal.fire({
+						title: "Ticket Details",
+						html: `
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>ID</th>
+										<th>Name</th>
+										<th>Test</th>
+									</tr>
+								</thead>
+								<tbody>
+									${ticketString}
+								</tbody>
+							</table>
+						`,
+						didOpen: () => {
+						}
+					})
+				}
+			})
+		}
+
+		function getTickets(id){
+			$.ajax({
+				url: '{{ route('ticket.get') }}',
+				data: {
+					where: ['event_id', id],
+				},
+				success: result => {
+					result = JSON.parse(result);
+					console.log(result, 'yesy');
 				}
 			})
 		}

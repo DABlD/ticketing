@@ -26,7 +26,7 @@ class CreateEventsTable extends Migration
             $table->string('venue');
             $table->string('venue_address')->nullable();
 
-            $table->boolean('ticket')->default(0);
+            $table->boolean('ticket')->nullable();
 
             $table->json('images')->nullable();
             $table->enum('status', ['Upcoming', 'Finished', 'Arranging', 'Cancelled'])->default('Arranging');

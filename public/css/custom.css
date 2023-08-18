@@ -96,3 +96,7 @@
 .brand-image{
 	float: none !important;
 }
+
+tbody td .btn{
+	margin-bottom: 3px;
+}

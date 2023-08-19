@@ -68,6 +68,7 @@ class TicketController extends Controller
     }
 
     public function update(Request $req){
+        $req->request->add(['updated_at' => now()]);
         echo DB::table($this->table)->where('id', $req->id)->update($req->except(['id', '_token']));
     }
 

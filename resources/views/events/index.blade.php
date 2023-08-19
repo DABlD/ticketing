@@ -540,8 +540,8 @@
 
 					let ticketString = "";
 					let checked = "";
-					
-					if(result == null){
+
+					if(!result.length){
 						ticketString = `
 							<tr>
 								<td colspan="8">NOT SET</td>
@@ -560,11 +560,15 @@
 									<td>${toDate(ticket.end_date)}</td>
 									<td>${ticket.sale_price ? "₱" + ticket.sale_price : "-"}</td>
 									<td>${ticket.sale_until ? toDate(ticket.sale_until) : "-"}</td>
+									<td>
+										<a class="btn btn-success" data-toggle="tooltip" title="Edit" onclick="editTicket(${id}, ${ticket.id})">
+											<i class="fas fa-pencil"></i>
+										</a>
+									</td>
 								</tr>
 							`;
 						})
 					}
-
 
 					Swal.fire({
 						title: "Ticket Details",
@@ -587,6 +591,7 @@
 										<th>Sell Duration</th>
 										<th>Sale Price</th>
 										<th>Sale End</th>
+										<th>Edit</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -662,6 +667,79 @@
 					})
 				}
 			});
+		}
+
+		function editTicket(id, tid){
+			$.ajax({
+				url: '{{ route('ticket.get') }}',
+				data: {
+					where: ['id', tid]
+				},
+				success: ticket => {
+					ticket = JSON.parse(ticket)[0];
+					console.log(ticket);
+
+					Swal.fire({
+						title: "Enter Details",
+						html: `
+							${input("type", "Type", ticket.type, 3, 9)}
+							${input("price", "Price", ticket.price, 3, 9, 'number', 'min=0 value="0"')}
+							${input("stock", "Stock", ticket.stock, 3, 9, 'number', 'min=0 value="0"')}
+							${input("end_date", "Sell Duration", ticket.end_date, 3, 9)}
+							${input("sale_price", "Sale Price", ticket.sale_price, 3, 9, 'number', 'min=0')}
+							${input("sale_until", "Sale End", ticket.sale_until, 3, 9)}
+							<br>
+							<h6 style="color: red; text-align: left;">Sale Details is optional</h6>
+						`,
+						didOpen: () => {
+							$("[name='end_date'], [name='sale_until']").flatpickr({
+								altInput: true,
+								altFormat: "F j, Y",
+								dateFormat: "Y-m-d",
+							});
+						},
+						preConfirm: () => {
+						    swal.showLoading();
+						    return new Promise(resolve => {
+						    	let bool = true;
+
+					            if($('[name="type"]').val() == "" || $('[name="price"]').val() == "" || $('[name="stock"]').val() == ""){
+					                Swal.showValidationMessage('Type, Price, and Stock is required');
+					            }
+					            else{
+					            	let bool = false;
+					            }
+
+					            bool ? setTimeout(() => {resolve()}, 500) : "";
+						    });
+						},
+					}).then(result => {
+						if(result.value){
+							swal.showLoading();
+							$.ajax({
+								url: "{{ route('ticket.update') }}",
+								type: "POST",
+								data: {
+									id: tid,
+									type: $('[name="type"]').val(),
+									price: $('[name="price"]').val(),
+									stock: $('[name="stock"]').val(),
+									end_date: $('[name="end_date"]').val(),
+									sale_price: $('[name="sale_price"]').val(),
+									sale_until: $('[name="sale_until"]').val(),
+									_token: $('meta[name="csrf-token"]').attr('content')
+								},
+								success: () => {
+									ss("Success");
+									setTimeout(() => {
+										viewTickets(id);
+									}, 1000);
+								}
+							})
+						}
+					});
+				}
+			})
 		}
 	</script>
 @endpush

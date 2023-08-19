@@ -14,7 +14,7 @@ class TicketController extends Controller
     }
 
     public function get(Request $req){
-        $array = DB::table($this->table)->select($req->select);
+        $array = DB::table($this->table)->select($req->select ?? "*");
 
         // IF HAS SORT PARAMETER $ORDER
         if($req->order){
@@ -56,6 +56,7 @@ class TicketController extends Controller
 
     public function store(Request $req){
         $data = new Ticket();
+        $data->event_id = $req->event_id;
         $data->type = $req->type;
         $data->price = $req->price;
         $data->stock = $req->stock;

@@ -25,7 +25,7 @@
                     				<th>Venue</th>
                     				<th>Date</th>
                     				<th>Time</th>
-                    				<th>Tickets</th>
+                    				<th>Tickets Sold</th>
                     				<th>Status</th>
                     				<th>Actions</th>
                     			</tr>
@@ -531,37 +531,62 @@
 		// TICKETS
 		function viewTickets(id){
 			$.ajax({
-				url: '{{ route('event.get') }}',
+				url: '{{ route('ticket.get') }}',
 				data: {
-					select: 'ticket',
-					where: ['id', id]
+					where: ['event_id', id]
 				},
 				success: result => {
-					result = JSON.parse(result)[0].ticket;
+					result = JSON.parse(result);
+
 					let ticketString = "";
 					let checked = "";
 					
 					if(result == null){
 						ticketString = `
 							<tr>
-								<td colspan="3">NOT SET</td>
+								<td colspan="8">NOT SET</td>
 							</tr>
 						`;
 					}
 					else{
-						let tickets = getTickets(id);
+						result.forEach(ticket => {
+							ticketString += `
+								<tr>
+									<td>${ticket.id}</td>
+									<td>${ticket.type}</td>
+									<td>₱${ticket.price}</td>
+									<td>${ticket.stock}</td>
+									<td>0</td>
+									<td>${toDate(ticket.end_date)}</td>
+									<td>${ticket.sale_price ? "₱" + ticket.sale_price : "-"}</td>
+									<td>${ticket.sale_until ? toDate(ticket.sale_until) : "-"}</td>
+								</tr>
+							`;
+						})
 					}
 
 
 					Swal.fire({
 						title: "Ticket Details",
 						html: `
+
+							<div style="height: 40px;">
+								<a class="float-right btn btn-success btn-sm" data-toggle="tooltip" title="Add Ticket" onclick="addTicket(${id})">
+									<i class="fas fa-plus fa-2xl"></i>
+								</a>
+							</div>
+
 							<table class="table table-hover">
 								<thead>
 									<tr>
 										<th>ID</th>
-										<th>Name</th>
-										<th>Test</th>
+										<th>Type</th>
+										<th>Price</th>
+										<th>Stock</th>
+										<th>Sold</th>
+										<th>Sell Duration</th>
+										<th>Sale Price</th>
+										<th>Sale End</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -569,6 +594,7 @@
 								</tbody>
 							</table>
 						`,
+						width: "80%",
 						didOpen: () => {
 						}
 					})
@@ -576,17 +602,66 @@
 			})
 		}
 
-		function getTickets(id){
-			$.ajax({
-				url: '{{ route('ticket.get') }}',
-				data: {
-					where: ['event_id', id],
+		function addTicket(id){
+			Swal.fire({
+				title: "Enter Details",
+				html: `
+					${input("type", "Type", null, 3, 9)}
+					${input("price", "Price", null, 3, 9, 'number', 'min=0 value="0"')}
+					${input("stock", "Stock", null, 3, 9, 'number', 'min=0 value="0"')}
+					${input("end_date", "Sell Duration", null, 3, 9)}
+					${input("sale_price", "Sale Price", null, 3, 9, 'number', 'min=0')}
+					${input("sale_until", "Sale End", null, 3, 9)}
+					<br>
+					<h6 style="color: red; text-align: left;">Sale Details is optional</h6>
+				`,
+				didOpen: () => {
+					$("[name='end_date'], [name='sale_until']").flatpickr({
+						altInput: true,
+						altFormat: "F j, Y",
+						dateFormat: "Y-m-d",
+					});
 				},
-				success: result => {
-					result = JSON.parse(result);
-					console.log(result, 'yesy');
+				preConfirm: () => {
+				    swal.showLoading();
+				    return new Promise(resolve => {
+				    	let bool = true;
+
+			            if($('[name="type"]').val() == "" || $('[name="price"]').val() == "" || $('[name="stock"]').val() == ""){
+			                Swal.showValidationMessage('Type, Price, and Stock is required');
+			            }
+			            else{
+			            	let bool = false;
+			            }
+
+			            bool ? setTimeout(() => {resolve()}, 500) : "";
+				    });
+				},
+			}).then(result => {
+				if(result.value){
+					swal.showLoading();
+					$.ajax({
+						url: "{{ route('ticket.store') }}",
+						type: "POST",
+						data: {
+							event_id: id,
+							type: $('[name="type"]').val(),
+							price: $('[name="price"]').val(),
+							stock: $('[name="stock"]').val(),
+							end_date: $('[name="end_date"]').val(),
+							sale_price: $('[name="sale_price"]').val(),
+							sale_until: $('[name="sale_until"]').val(),
+							_token: $('meta[name="csrf-token"]').attr('content')
+						},
+						success: () => {
+							ss("Success");
+							setTimeout(() => {
+								viewTickets(id);
+							}, 1000);
+						}
+					})
 				}
-			})
+			});
 		}
 	</script>
 @endpush

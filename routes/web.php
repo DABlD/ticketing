@@ -15,28 +15,28 @@ use Illuminate\Support\Facades\Route;
 
 //JUST ADD '->defaults("group", "Settings")' IF YOU WANT TO GROUP A NAV IN A DROPDOWN
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-Route::get('/', function(){
-   return redirect()->route('login');
+Route::get('/', function () {
+    return view('welcome');
 });
+
+// Route::get('/', function(){
+//    return redirect()->route('login');
+// });
 
 
 Route::group([
         'middleware' => 'auth',
     ], function() {
-        Route::get('/', "DashboardController@index")->name('dashboard');
+        // Route::get('/', "DashboardController@index")->name('dashboard');
 
 
-        Route::get('/', 'DashboardController@index')
+        Route::get('/dashboard', 'DashboardController@index')
             ->defaults('sidebar', 1)
             ->defaults('icon', 'fas fa-list')
             ->defaults('name', 'Dashboard')
             ->defaults('roles', array('Admin'))
             ->name('dashboard')
-            ->defaults('href', '/');
+            ->defaults('href', '/dashboard');
 
         // USER ROUTES
         $cname = "user";
@@ -111,6 +111,42 @@ Route::group([
             }
         );
 
+        // EVENT ROUTES
+        $cname = "transaction";
+        Route::group([
+                'as' => "$cname.",
+                'prefix' => "$cname/"
+            ], function () use($cname){
+
+                Route::get("/", ucfirst($cname) . "Controller@index")
+                    ->defaults("sidebar", 1)
+                    ->defaults("icon", "fas fa-dollar")
+                    ->defaults("name", ucfirst($cname) . "s")
+                    ->defaults("roles", array("Admin"))
+                    // ->defaults("group", "Settings")
+                    ->name($cname)
+                    ->defaults("href", "/$cname");
+            }
+        );
+
+        // EVENT ROUTES
+        $cname = "log";
+        Route::group([
+                'as' => "$cname.",
+                'prefix' => "$cname/"
+            ], function () use($cname){
+
+                Route::get("/", ucfirst($cname) . "Controller@index")
+                    ->defaults("sidebar", 1)
+                    ->defaults("icon", "fas fa-history")
+                    ->defaults("name", ucfirst($cname) . "s")
+                    ->defaults("roles", array("Admin"))
+                    // ->defaults("group", "Settings")
+                    ->name($cname)
+                    ->defaults("href", "/$cname");
+            }
+        );
+
         // DATATABLES
         $cname = "datatable";
         Route::group([
@@ -120,6 +156,7 @@ Route::group([
 
                 Route::get("user", ucfirst($cname) . "Controller@user")->name('user');
                 Route::get("event", ucfirst($cname) . "Controller@event")->name('event');
+                Route::get("log", ucfirst($cname) . "Controller@log")->name('log');
             }
         );
     }

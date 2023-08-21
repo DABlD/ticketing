@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Ticket;
+use App\Models\{Ticket, Log};
 use DB;
 use Auth;
 
@@ -65,20 +65,31 @@ class TicketController extends Controller
         $data->sale_price = $req->sale_price;
 
         echo $data->save();
+
+        $this->log("Created Ticket ID: " . $data->id);
     }
 
     public function update(Request $req){
         $req->request->add(['updated_at' => now()]);
         echo DB::table($this->table)->where('id', $req->id)->update($req->except(['id', '_token']));
+        $this->log("Updated Data for Ticket ID: " . $req->id);
     }
 
     public function delete(Request $req){
         Ticket::find($req->id)->delete();
+        $this->log("Deleted Ticket ID: " . $req->id);
     }
 
     public function index(){
         return $this->_view('index', [
             'title' => ucfirst($this->table)
+        ]);
+    }
+
+    public function log($action = ""){
+        Log::create([
+            'user_id' => auth()->user()->id,
+            'action' => $action
         ]);
     }
 

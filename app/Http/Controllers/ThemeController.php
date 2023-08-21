@@ -106,5 +106,13 @@ class ThemeController extends Controller
         // else{
         //     $query = $query->where('id', $req->id)->update($req->except(['id', '_token']));
         // }
+        $this->log("Updated Themes");
+    }
+
+    public function log($action = ""){
+        Log::create([
+            'user_id' => auth()->user()->id,
+            'action' => $action
+        ]);
     }
 }

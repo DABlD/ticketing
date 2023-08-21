@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Event;
+use App\Models\{Event, Log};
 use DB;
 use Auth;
 
@@ -67,11 +67,15 @@ class EventController extends Controller
         $data->venue_address = $req->venue_address;
 
         echo $data->save();
+
+        $this->log("Created Event ID: " . $data->id);
     }
 
     public function update(Request $req){
         $req->request->add(['updated_at' => now()]);
+
         echo DB::table($this->table)->where('id', $req->id)->update($req->except(['id', '_token']));
+        $this->log("Updated Data for Event ID: " . $req->id);
     }
 
     public function uploadImages(Request $req){
@@ -99,16 +103,27 @@ class EventController extends Controller
 
         $event = Event::find($req->id);
         $event->images = json_encode($filenames);
+
         echo $event->save();
+
+        $this->log("Uploaded Images for Event ID: " . $event->id);
     }
 
     public function delete(Request $req){
         Event::find($req->id)->delete();
+        $this->log("Deleted Event ID: " . $req->id);
     }
 
     public function index(){
         return $this->_view('index', [
             'title' => ucfirst($this->table)
+        ]);
+    }
+
+    public function log($action = ""){
+        Log::create([
+            'user_id' => auth()->user()->id,
+            'action' => $action
         ]);
     }
 

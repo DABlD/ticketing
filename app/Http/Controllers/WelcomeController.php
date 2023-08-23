@@ -8,13 +8,15 @@ use App\Models\Event;
 class WelcomeController extends Controller
 {
     public function index(){
-        $data = 
+        $data = Event::where('date', '>=', now())->orderByDesc('date')->get();
+        
         return $this->_view('index', [
-            'title' => ucfirst($this->table)
+            'title' => "@TTEND",
+            'data' => $data
         ]);
     }
 
     private function _view($view, $data = array()){
-        return view("$this->table.$view", $data);
+        return view("welcome", $data);
     }
 }

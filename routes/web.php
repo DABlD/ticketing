@@ -15,9 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 //JUST ADD '->defaults("group", "Settings")' IF YOU WANT TO GROUP A NAV IN A DROPDOWN
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', "WelcomeController@index")->name("/");
 
 // Route::get('/', function(){
 //    return redirect()->route('login');

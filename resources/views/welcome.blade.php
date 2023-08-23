@@ -127,53 +127,62 @@
                 <div id="rev_slider_202_1" class="rev_slider fullscreenbanner" style="display:none;" data-version="5.1.1RC">
                     <ul>
                         <!-- SLIDE  -->
-                        <li data-index="rs-672" data-transition="slidingoverlayhorizontal" data-slotamount="default" data-easein="default" data-easeout="default" data-masterspeed="default" data-thumb="welcome/images/index11-180x110.jpg" data-rotate="0" data-saveperformance="off" data-title="WE FOCUSED" data-description="">
-                            <!-- MAIN IMAGE -->
-                            <img src="welcome/images/index11.jpg" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="5" class="rev-slidebg" data-no-retina>
-                            <!-- LAYERS -->
+                        @foreach($data as $event)
+                          @php
+                            $images = json_decode($event->images);
+                          @endphp
+                          <li data-index="rs-{{ $event->id }}" data-transition="slidingoverlayhorizontal" data-slotamount="default" data-easein="default" data-easeout="default" data-masterspeed="default" data-rotate="0" data-saveperformance="off">
+                              <!-- MAIN IMAGE -->
+                              <img src="{{ isset($images[0]) ? "uploads/$event->id/$images[0]" : "images/no-image.png" }}" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="5" class="rev-slidebg" data-no-retina>
+                              <!-- LAYERS -->
 
-                            <!-- LAYER NR. 1 -->
-                            <div class="tp-caption font-poppins font-white tp-resizeme rs-parallaxlevel-6" id="slide-898-layer-1" style="z-index: 8; white-space: nowrap;"
-                            data-fontsize="['90','70','62','52']" 
-                            data-fontweight="600" 
-                            data-height="none" 
-                            data-lineheight="['102','82','74','64']" 
-                            data-responsive_offset="on" 
-                            data-splitin="none" 
-                            data-splitout="none"
-                            
-                            data-frames='[{"from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":1500,"to":"o:1;","delay":1050,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"y:[100%];","mask":"x:inherit;y:inherit;s:inherit;e:inherit;","ease":"nothing"}]'
-                            
-                            data-whitespace="nowrap" 
-                            data-width="none" 
-                            data-x="['left','left','left','left']" 
-                            data-hoffset="['40','40','40','20']" 
-                            data-y="['center','center','center','center']" 
-                            data-voffset="['-30','-30','-30','-30']">
-                              We create<br>design focused
-                            </div> 
+                              <!-- LAYER NR. 1 -->
+                              <div class="tp-caption font-poppins font-white tp-resizeme rs-parallaxlevel-6" id="slide-898-layer-1" style="z-index: 8; white-space: nowrap;"
+                              data-fontsize="['90','70','62','52']" 
+                              data-fontweight="600" 
+                              data-height="none" 
+                              data-lineheight="['102','82','74','64']"
+                              data-splitin="none" 
+                              data-splitout="none"
+                              
+                              data-frames='[{
+                                    "from":"y:[100%];z:0;",
+                                    "speed":500,
+                                    "to":"o:1;",
+                                    "delay":1050,
+                                    "ease":"easeOutBack"
+                                  }]'
+                              
+                              data-whitespace="nowrap" 
+                              data-width="none" 
+                              data-x="['left','left','left','left']" 
+                              data-y="['center','center','center','center']" 
+                              >
+                                <p style="text-shadow: 3px 3px black;">{{ $event->name }}</p>
+                              </div> 
 
-                            <!-- LAYER NR. 2 -->
-                            <div class="tp-caption font-poppins font-white tp-resizeme rs-parallaxlevel-6" id="slide-898-layer-2" style="z-index: 8; white-space: nowrap;"
-                            data-fontsize="['24','24','24','20']" 
-                            data-fontweight="300" 
-                            data-height="none" 
-                            data-lineheight="['40','40','40','40']" 
-                            data-responsive_offset="on" 
-                            data-splitin="none" 
-                            data-splitout="none"
-                            
-                            data-frames='[{"from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":1500,"to":"o:1;","delay":1450,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"y:[100%];","mask":"x:inherit;y:inherit;s:inherit;e:inherit;","ease":"nothing"}]'
-                            
-                            data-whitespace="nowrap" 
-                            data-width="none" 
-                            data-x="['left','left','left','left']" 
-                            data-hoffset="['40','40','40','20']" 
-                            data-y="['center','center','center','center']" 
-                            data-voffset="['90','80','70',50']">
-                              on startups, creatives and small businesses
-                            </div>                            
-                        </li>
+                              {{-- <!-- LAYER NR. 2 -->
+                              <div class="tp-caption font-poppins font-white tp-resizeme rs-parallaxlevel-6" id="slide-898-layer-2" style="z-index: 8; white-space: nowrap;"
+                              data-fontsize="['24','24','24','20']" 
+                              data-fontweight="300" 
+                              data-height="none" 
+                              data-lineheight="['40','40','40','40']" 
+                              data-responsive_offset="on" 
+                              data-splitin="none" 
+                              data-splitout="none"
+                              
+                              data-frames='[{"from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":1500,"to":"o:1;","delay":1450,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"y:[100%];","mask":"x:inherit;y:inherit;s:inherit;e:inherit;","ease":"nothing"}]'
+                              
+                              data-whitespace="nowrap" 
+                              data-width="none" 
+                              data-x="['left','left','left','left']" 
+                              data-hoffset="['40','40','40','20']" 
+                              data-y="['center','center','center','center']" 
+                              data-voffset="['90','80','70',50']">
+                                on startups, creatives and small businesses
+                              </div>            --}}                 
+                          </li>
+                        @endforeach
                         
                         {{-- <li data-index="rs-673" data-transition="slidingoverlayhorizontal" data-slotamount="default" data-easein="default" data-easeout="default" data-masterspeed="default" data-thumb="welcome/images/traincover-180x110.jpg" data-rotate="0" data-saveperformance="off" data-title="CREATIVE STUDIO" data-description="">
                             <!-- MAIN IMAGE -->

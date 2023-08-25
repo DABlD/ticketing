@@ -98,6 +98,11 @@
                       <li>
                         <a href="#contact-link"><div class="main-menu-title">Contact</div></a>
                       </li>
+                      
+                      <!-- MENU ITEM -->
+                      <li>
+                        <a href="{{ url('/login') }}"><div class="main-menu-title">Login</div></a>
+                      </li>
 
                     </ul>
               
@@ -225,16 +230,16 @@
             <!-- END REVOLUTION SLIDER -->
 
           <!-- SCROLL ICON -->
-          <div class="local-scroll-cont font-white">
-            <a href="#about" class="scroll-down smooth-scroll">
+{{--           <div class="local-scroll-cont font-white">
+            <a href="#about-us-link" class="scroll-down smooth-scroll">
               <div class="icon icon-arrows-down"></div>
             </a>  
-          </div>
+          </div> --}}
           
         </div>
   
         <!-- FEATURES 16 TABS 2 -->
-        <div class="page-section">
+        <div id="about-us-link" class="page-section">
           <div class="bg-yellow mb-100">
             <div class="container">
               
@@ -283,7 +288,7 @@
         </div>
 
         <!-- FEATURES 17 OUR SERVICES 2 -->
-        <div id="services-link" class="page-section pt-160-b-120-cont">
+        <div id="services-link" class="page-section pt-160-b-120-cont" style="padding-top: 0px; padding-bottom: 0px;">
           <div class="container">
 
             <div class="row">
@@ -349,24 +354,24 @@
               
                 <!-- TITLE -->
                 <div class="mb-10">
-                  <h2 class="section-title2 font-light">Recent Works</h2>
+                  <h2 class="section-title2 font-light">Recent Events</h2>
                 </div>
    
-                <!-- PORTFOLIO FILTER -->                    
+                <!-- PORTFOLIO FILTER -->
                 <div class="pl-xxs-10">
                 
                   <ul class="port-filter font-poppins">
                     <li>
-                      <a href="#" class="filter active" data-filter="*">All Projects</a>
+                      <a href="#" class="filter active" data-filter="*">All</a>
                     </li>
                     <li>
-                      <a href="#" class="filter" data-filter=".development">Development</a>
+                      <a href="#" class="filter" data-filter=".development">Concert</a>
                     </li>
                     <li>
-                      <a href="#" class="filter" data-filter=".design">Design</a>
+                      <a href="#" class="filter" data-filter=".design">Music Festival</a>
                     </li>
                     <li>
-                      <a href="#" class="filter" data-filter=".photography">Photography</a>
+                      <a href="#" class="filter" data-filter=".photography">Conference</a>
                     </li>
                   </ul>
                   
@@ -487,11 +492,19 @@
                             
               <!-- Item -->
               <div class="col-xs-6 col-sm-3 border-none">
+                {{-- <div class="count-number">
+                </div>
+                <div class="count-descr">
+                  <span class="count-title"></span>
+                </div> --}}
+              </div>
+
+              <div class="col-xs-6 col-sm-3 border-none">
                 <div class="count-number">
                   75
                 </div>
                 <div class="count-descr">
-                  <span class="count-title">Awards Winning</span>
+                  <span class="count-title">Total Events</span>
                 </div>
               </div>
               
@@ -501,29 +514,38 @@
                  450
                 </div>
                 <div class="count-descr">
-                  <span class="count-title">Happy Clients</span>
+                  <span class="count-title">Total Attendees</span>
                 </div>
+              </div>
+                            
+              <!-- Item -->
+              <div class="col-xs-6 col-sm-3 border-none">
+                {{-- <div class="count-number">
+                </div>
+                <div class="count-descr">
+                  <span class="count-title"></span>
+                </div> --}}
               </div>
               
               <!-- Item -->
-              <div class="col-xs-6 col-sm-3 border-none">
+              {{-- <div class="col-xs-6 col-sm-3 border-none">
                 <div class="count-number">
                   151
                 </div>
                 <div class="count-descr">
                   <span class="count-title">Projects Done</span>
                 </div>
-              </div>
+              </div> --}}
               
               <!-- Item -->
-              <div class="col-xs-6 col-sm-3 border-none">
+              {{-- <div class="col-xs-6 col-sm-3 border-none">
                 <div class="count-number">
                  768
                 </div>
                 <div class="count-descr">
                   <span class="count-title">Hours Of Code</span>
                 </div>
-              </div>  
+              </div>   --}}
               
             </div>
           </div>
@@ -541,7 +563,7 @@
                   </div>
                   <div class="cis-text">
                     <h3>Address</h3>
-                    <p>790 Folsom Ave, San Francisco</p>
+                    <p>Metro manila</p>
                   </div>
                 </div>
               </div>
@@ -552,7 +574,7 @@
                   </div>
                   <div class="cis-text">
                     <h3>Email</h3>
-                    <p><a href="mailto:info@elementy.com">info@elementy.com</a></p>
+                    <p><a href="mailto:info@attend.com">info@attend.com</a></p>
                   </div>
                 </div>
               </div>
@@ -563,7 +585,7 @@
                   </div>
                   <div class="cis-text">
                     <h3>Call Us</h3>
-                    <p>1-800-312-212, 1-800-311-101</p>
+                    <p>+63 8765 1234 / +63 987 6543 210</p>
                   </div>
                 </div>
               </div>
@@ -577,13 +599,17 @@
             <div class="container-fluid">
               <div class="row">
               
-                <div class="col-md-6">
+                {{-- <div class="col-md-6">
                   <div class="row row-sm-fix">
                     <!-- <div data-address="580 California Street, San Francisco, CA" id="google-map"></div> -->
                 
                     <!-- *This is an example of using latitude and longitude if you need to use them instead of an address. Read more in the documentation.* -->
                     <div data-latitude="37.792888" data-longitude="-122.404041" id="google-map"></div>
                   </div>
+                </div> --}}
+
+                <div class="col-md-4">
+                  <div class="row"></div>
                 </div>
 
                 <div class="col-md-6">
@@ -636,6 +662,10 @@
                   
                   </div>
                 </div>
+
+                <div class="col-md-2">
+                  <div class="row"></div>
+                </div>
                   
               </div>
             </div>
@@ -647,11 +677,9 @@
                     
             <!-- Social Links -->
             <div class="footer-soc-a">
-              <a href="https://1.envato.market/a1gQR" title="Facebook" target="_blank"><i class="fa fa-facebook"></i></a>
-              <a href="https://1.envato.market/a1gQR" title="Twitter" target="_blank"><i class="fa fa-twitter"></i></a>
-              <a href="https://www.behance.net/abcgomel" title="Behance" target="_blank"><i class="fa fa-behance"></i></a>
-              <a href="https://1.envato.market/a1gQR" title="LinkedIn+" target="_blank"><i class="fa fa-linkedin"></i></a>
-              <a href="https://dribbble.com/abcgomel" title="Dribbble" target="_blank"><i class="fa fa-dribbble"></i></a>
+              <a href="https://fb.com" title="Facebook" target="_blank"><i class="fa fa-facebook"></i></a>
+              <a href="https://x.com" title="Twitter" target="_blank"><i class="fa fa-twitter"></i></a>
+              <a href="https://youtube.com" title="YouTube" target="_blank"><i class="fa fa-youtube"></i></a>
             </div>
                     
           </div>

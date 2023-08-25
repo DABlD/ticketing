@@ -81,7 +81,7 @@
                       
                       <!-- MENU ITEM -->
                       <li>
-                        <a href="#portfolio-link"><div class="main-menu-title">Portfolio</div></a>
+                        <a href="#about-us-link"><div class="main-menu-title">About Us</div></a>
                       </li>
                       
                       <!-- MENU ITEM -->
@@ -91,7 +91,7 @@
                       
                       <!-- MENU ITEM -->
                       <li>
-                        <a href="#about-us-link"><div class="main-menu-title">About Us</div></a>
+                        <a href="#portfolio-link"><div class="main-menu-title">Portfolio</div></a>
                       </li>
                       
                       <!-- MENU ITEM -->
@@ -147,9 +147,9 @@
                               
                               data-frames='[{
                                     "from":"y:[100%];z:0;",
-                                    "speed":500,
+                                    "speed":600,
                                     "to":"o:1;",
-                                    "delay":1050,
+                                    "delay":900,
                                     "ease":"easeOutBack"
                                   }]'
                               
@@ -232,73 +232,6 @@
           </div>
           
         </div>
-        
-        <!-- FEATURES 15 WE ARE CREATIVE -->
-        <div id="about" class="page-section">
-          <div class="container fes1-cont">
-
-            <div class="row">
-
-              <div class="col-lg-4 col-md-4">
-                <div class="fes1-main-title-cont wow fadeInUp">
-                  <div class="fes15-title-32">
-                    About<br>Our Studio
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-offset-1 col-lg-7 col-md-8">
-                    
-                <div class="row">
-                    
-                  <div class="col-md-6 col-sm-6 pb-20">
-                    <div class="fes11-box wow fadeIn" >
-                      <div class="fes1-box-icon">
-                        <div class="icon icon-basic-mixer2"></div>
-                      </div>
-                      <h3>Fully Responsive</h3>
-                    </div>
-                  </div>
-                      
-                  <div class="col-md-6 col-sm-6 pb-20">
-                    <div class="fes11-box wow fadeIn" data-wow-delay="200ms">
-                      <div class="fes1-box-icon">
-                        <div class="icon icon-basic-lightbulb"></div>
-                      </div>
-                      <h3>Retina Ready</h3>
-                    </div>
-                  </div>
-                      
-                </div>
-                    
-                <div class="row">
-                    
-                  <div class="col-md-6 col-sm-6 pb-20">
-                    <div class="fes11-box wow fadeIn" data-wow-delay="400ms">
-                      <div class="fes1-box-icon">
-                        <div class="icon icon-basic-helm"></div>
-                      </div>
-                      <h3>Unique Design</h3>
-                    </div>
-                  </div>
-                      
-                  <div class="col-md-6 col-sm-6 pb-20">
-                    <div class="fes11-box wow fadeIn"  data-wow-delay="600ms">
-                      <div class="fes1-box-icon">
-                        <div class="icon icon-basic-settings"></div>
-                      </div>
-                      <h3>Customizable</h3>
-                    </div>
-                  </div>
-                  
-                </div>                    
-                    
-              </div>
-              
-            </div>
-              
-          </div>
-        </div>
   
         <!-- FEATURES 16 TABS 2 -->
         <div class="page-section">
@@ -309,96 +242,101 @@
               <div class="row">
                 <div class="col-md-12">
                   
-                  <ul class="fes14-nav-tabs nav nav-tabs bootstrap-tabs">
-                    <li class="active"><a href="#web-design" class="fes14-nav-a" data-toggle="tab"><div class="tab-nav-icon icon icon-basic-laptop"></div><div class="tab-nav-text">Web Design</div></a></li>
-                    <li><a href="#ui-design"  class="fes14-nav-a" data-toggle="tab"><div class="tab-nav-icon icon icon-software-horizontal-align-center"></div><div class="tab-nav-text">UI/UX Design</div></a></li>
-                    <li><a href="#graphic-design"  class="fes14-nav-a" data-toggle="tab"><div class="tab-nav-icon icon icon-basic-sheet-pen"></div><div class="tab-nav-text">Graphic Design</div></a></li>
-                    <li><a href="#branding-tab"  class="fes14-nav-a" data-toggle="tab"><div class="tab-nav-icon icon icon-ecommerce-diamond"></div><div class="tab-nav-text">Branding</div></a></li>
-                    <li><a href="#development-tab"  class="fes14-nav-a" data-toggle="tab"><div class="tab-nav-icon icon icon-basic-archive-full"></div><div class="tab-nav-text">Development</div></a></li>
-                  </ul>
-                  
+                  <br>
+
+                  <h1><b>
+                    ABOUT US
+                  </b></h1>
+
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula nulla sem, at tempus dui convallis vitae, Phasellus sollicitudin turpis mauris, posuere ultrices purus tristique sed.
                 </div>
               </div>
-              
-              <!-- TABS CONTENT & IMAGES -->
-              <div class="row">
-              
-                <!-- TABS CONTENT -->
-                <div class="col-md-6">
-                  <div class="fes14-tab-content tab-content">
-                  
-                    <!-- TAB 1 -->
-                    <div class="tab-pane fade in active" id="web-design">
-                      <h1 class="fes14-tab-title"><strong>Elementy</strong></h1>
-                      <h2 class="fes14-tab-sub-title"><strong>template for your business</strong></h2>
-                      <p class="fes14-tab-text mb-60">
-                        Nulla sed vehicula leo. Nam volutpat dapibus nisi sed ultrices. Proin ullamcorper eget ex a cursus. In sed turpis at orci laoreet ultrices et vitae urna. 
-                      </p>
-                      <div class="fes12-btn-cont mt-30">
-                        <a class="button medium rounded gray" href="https://1.envato.market/Qn6YP">PURCHASE NOW</a>
-                      </div>
-                    </div>
-                    
-                    <!-- TAB 2 -->
-                    <div class="tab-pane fade" id="ui-design">
-                      <h1 class="fes14-tab-title"><strong>UI/UX Design</strong></h1>
-                      <h2 class="fes14-tab-sub-title"><strong>enhancing user satisfaction</strong></h2>
-                      <p class="fes14-tab-text mb-60">
-                        Nulla sed vehicula leo. Nam volutpat dapibus nisi sed ultrices. Proin ullamcorper eget ex a cursus. In sed turpis at orci laoreet ultrices et vitae urna. 
-                      </p>
-                      <div class="fes12-btn-cont mt-30">
-                        <a class="button medium rounded gray" href="https://1.envato.market/Qn6YP">PURCHASE NOW</a>
-                      </div>
-                    </div>
-                    
-                    <!-- TAB 3 -->
-                    <div class="tab-pane fade" id="graphic-design">
-                      <h1 class="fes14-tab-title"><strong>Graphic design</strong></h1>
-                      <h2 class="fes14-tab-sub-title"><strong>process of visual communication</strong></h2>
-                      <p class="fes14-tab-text mb-60">
-                        Nulla sed vehicula leo. Nam volutpat dapibus nisi sed ultrices. Proin ullamcorper eget ex a cursus. In sed turpis at orci laoreet ultrices et vitae urna. 
-                      </p>
-                      <div class="fes12-btn-cont mt-30">
-                        <a class="button medium rounded gray" href="https://1.envato.market/Qn6YP">PURCHASE NOW</a>
-                      </div>
-                    </div>
-                    
-                    <!-- TAB 4 -->
-                    <div class="tab-pane fade" id="branding-tab">
-                      <h1 class="fes14-tab-title"><strong>Branding</strong></h1>
-                      <h2 class="fes14-tab-sub-title"><strong>creating and launching brands</strong></h2>
-                      <p class="fes14-tab-text mb-60">
-                        Nulla sed vehicula leo. Nam volutpat dapibus nisi sed ultrices. Proin ullamcorper eget ex a cursus. In sed turpis at orci laoreet ultrices et vitae urna. 
-                      </p>
-                      <div class="fes12-btn-cont mt-30">
-                        <a class="button medium rounded gray" href="https://1.envato.market/Qn6YP">PURCHASE NOW</a>
-                      </div>
-                    </div>
-                    
-                    <!-- TAB 5 -->
-                    <div class="tab-pane fade" id="development-tab">
-                      <h1 class="fes14-tab-title"><strong>Apps & sites</strong></h1>
-                      <h2 class="fes14-tab-sub-title"><strong>apps & web sites development</strong></h2>
-                      <p class="fes14-tab-text mb-60">
-                        Nulla sed vehicula leo. Nam volutpat dapibus nisi sed ultrices. Proin ullamcorper eget ex a cursus. In sed turpis at orci laoreet ultrices et vitae urna. 
-                      </p>
-                      <div class="fes12-btn-cont mt-30">
-                        <a class="button medium rounded gray" href="https://1.envato.market/Qn6YP">PURCHASE NOW</a>
-                      </div>
-                    </div>
 
-                  </div>
+              <div class="row">
+                <div class="col-md-6">
+                  
+                  <h2>
+                    Hassle free, Real time Registration Platform
+                  </h2>
+
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula nulla sem, at tempus dui convallis vitae, Phasellus sollicitudin turpis mauris, posuere ultrices purus tristique sed.
+
+
+                  <h2>
+                    Pre register ahead and create your digital Pass
+                  </h2>
+
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula nulla sem, at tempus dui convallis vitae, Phasellus sollicitudin turpis mauris, posuere ultrices purus tristique sed.
                 </div>
-                
+
+
                 <!-- IMAGES -->
                 <div class="col-md-6 fes9-img-cont clearfix">
-                  <div class="fes16-img-center clearfix">
-                    <img src="welcome/images/mac.png" alt="img" class="wow fadeInUp" data-wow-delay="150ms" data-wow-duration="1s">
+                  <div class="fes16-img-center clearfix" style="width: 500px !important;">
+                    <img src="{{ asset('images/about-us2.png') }}" alt="img" class="wow fadeInUp" data-wow-delay="150ms" data-wow-duration="1s">
                   </div>
                 </div>
+              </div>
+            
+            </div>
+          </div>
+        </div>
+
+        <!-- FEATURES 17 OUR SERVICES 2 -->
+        <div id="services-link" class="page-section pt-160-b-120-cont">
+          <div class="container">
+
+            <div class="row">
+              <div class="col-md-12">
                 
+                <br>
+
+                <h1><b>
+                  OUR SERVICES
+                </b></h1>
+
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula nulla sem, at tempus dui convallis vitae, Phasellus sollicitudin turpis mauris, posuere ultrices purus tristique sed.
               </div>
             </div>
+
+
+
+            <div class="row">
+
+              <!-- IMAGES -->
+              <div class="col-md-6 fes9-img-cont clearfix">
+                <div class="fes16-img-center clearfix">
+                  <img src="{{ asset('images/login.png') }}" alt="img" class="wow fadeInUp" data-wow-delay="150ms" data-wow-duration="1s">
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                
+                <h2>
+                  Event registration made easy, Digitally designed to systematically facilitate and digitally organize your events.
+                </h2>
+
+                <div class="row">
+
+                  <!-- IMAGES -->
+                  <div class="col-md-6 fes9-img-cont clearfix">
+                    <div class="fes16-img-center clearfix" style="width: 180px; height: 200px !important;">
+                      <img src="{{ asset('images/image1.png') }}" alt="img" class="wow fadeInUp" data-wow-delay="150ms" data-wow-duration="1s">
+                    </div>
+                  </div>
+
+                  <!-- IMAGES -->
+                  <div class="col-md-6 fes9-img-cont clearfix">
+                    <div class="fes16-img-center clearfix" style="width: 180px; height: 200px !important;">
+                      <img src="{{ asset('images/image2.png') }}" alt="img" class="wow fadeInUp" data-wow-delay="150ms" data-wow-duration="1s">
+                    </div>
+                  </div>
+                </div>
+
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula nulla sem, at tempus dui convallis vitae, Phasellus sollicitudin turpis mauris, posuere ultrices purus tristique sed.
+              </div>
+            </div>
+
           </div>
         </div>
         
@@ -540,104 +478,6 @@
           <a class="port-view-more" href="portfolio-masonry-4col.html">View All Projects</a>
         </div>
         <!-- END PORTFOLIO SECTION -->
-
-        <!-- FEATURES 17 OUR SERVICES 2 -->
-        <div id="services-link" class="page-section pt-160-b-120-cont">
-          <div class="container">
-            <div class="row">
-            
-              <div class="col-md-12">
-                <div class="mb-70 wow fadeIn">
-                  <h2 class="section-title2 font-light text-center p-0">Our Services</h2>
-                </div>
-              </div>  
-              
-              <div class="col-xs-12 col-sm-4 col-md-4">
-                <div class="mb-70 wow fadeIn">
-                  <div class="fes17-title-cont" >
-                    <div class="fes17-box-icon">
-                      <div class="icon icon-ecommerce-graph-increase"></div>
-                    </div>
-                    <h3>Marketing</h3>
-                  </div>
-                  <div class="text-center">
-                    Maecenas luctus nisi in sem fermentum blandit. In nec elit sollicitudin, elementum odio et, dictum purus. Proin malesuada quam a volutpat  
-                  </div>
-                </div>
-              </div>
-              <div class="col-xs-12 col-sm-4 col-md-4">
-                <div class="mb-70 wow fadeIn" data-wow-delay="200ms">
-                  <div class="fes17-title-cont" >
-                    <div class="fes17-box-icon">
-                      <div class="icon icon-basic-settings"></div>
-                    </div>
-                    <h3>Development</h3>
-                  </div>
-                  <div class="text-center">
-                    Maecenas luctus nisi in sem fermentum blandit. In nec elit sollicitudin, elementum odio et, dictum purus. Proin malesuada quam a volutpat  
-                  </div>
-                </div>
-              </div>
-              <div class="col-xs-12 col-sm-4 col-md-4">
-                <div class="mb-70 wow fadeIn" data-wow-delay="400ms">
-                  <div class="fes17-title-cont" >
-                    <div class="fes17-box-icon">
-                      <div class="icon icon-basic-share"></div>
-                    </div>
-                    <h3>Production</h3>
-                  </div>
-                  <div class="text-center">
-                    Maecenas luctus nisi in sem fermentum blandit. In nec elit sollicitudin, elementum odio et, dictum purus. Proin malesuada quam a volutpat  
-                  </div>
-                </div>
-              </div>
-              
-            </div>
-            <div class="row">
-            
-              <div class="col-xs-12 col-sm-4 col-md-4">
-                <div class="mb-70 wow fadeIn" data-wow-delay="600ms">
-                  <div class="fes17-title-cont" >
-                    <div class="fes17-box-icon">
-                      <div class="icon icon-basic-target"></div>
-                    </div>
-                    <h3>Branding</h3>
-                  </div>
-                  <div class="text-center">
-                    Maecenas luctus nisi in sem fermentum blandit. In nec elit sollicitudin, elementum odio et, dictum purus. Proin malesuada quam a volutpat  
-                  </div>
-                </div>
-              </div>
-              <div class="col-xs-12 col-sm-4 col-md-4">
-                <div class="mb-70 wow fadeIn" data-wow-delay="800ms">
-                  <div class="fes17-title-cont" >
-                    <div class="fes17-box-icon">
-                      <div class="icon icon-basic-globe"></div>
-                    </div>
-                    <h3>Web Design</h3>
-                  </div>
-                  <div class="text-center">
-                    Maecenas luctus nisi in sem fermentum blandit. In nec elit sollicitudin, elementum odio et, dictum purus. Proin malesuada quam a volutpat  
-                  </div>
-                </div>
-              </div>
-              <div class="col-xs-12 col-sm-4 col-md-4">
-                <div class="mb-70 wow fadeIn" data-wow-delay="1000ms">
-                  <div class="fes17-title-cont" >
-                    <div class="fes17-box-icon">
-                      <div class="icon icon-basic-picture"></div>
-                    </div>
-                    <h3>Photography</h3>
-                  </div>
-                  <div class="text-center">
-                    Maecenas luctus nisi in sem fermentum blandit. In nec elit sollicitudin, elementum odio et, dictum purus. Proin malesuada quam a volutpat  
-                  </div>
-                </div>
-              </div>             
-            
-            </div>
-          </div>
-        </div>
         
         <!-- COUNTERS 2 -->
         <div id="counter-1" class="page-section p-80-cont bg-gray">

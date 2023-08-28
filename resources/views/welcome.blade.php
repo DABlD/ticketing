@@ -364,15 +364,11 @@
                     <li>
                       <a href="#" class="filter active" data-filter="*">All</a>
                     </li>
-                    <li>
-                      <a href="#" class="filter" data-filter=".development">Concert</a>
-                    </li>
-                    <li>
-                      <a href="#" class="filter" data-filter=".design">Music Festival</a>
-                    </li>
-                    <li>
-                      <a href="#" class="filter" data-filter=".photography">Conference</a>
-                    </li>
+                    @foreach($categories as $category)
+                      <li>
+                        <a href="#" class="filter" data-filter="{{ $category }}">{{ $category }}</a>
+                      </li>
+                    @endforeach
                   </ul>
                   
                 </div>
@@ -382,96 +378,26 @@
             
             <!-- ITEMS GRID -->
             <ul class="port-grid port-grid-3 clearfix" id="items-grid">
-              
-              <!-- Item -->
-              <li class="port-item mix design">
-                <a href="portfolio-single1.html">
-                  <div class="port-img-overlay">
-                    <img class="port-main-img" src="welcome/images/projects-1-3col.jpg" alt="img" >
-                  </div>
-                  <div class="port-overlay-cont">
-                    <div class="port-title-cont2">
-                      <h3>Minimalism</h3>
-                      <span>design</span>
+
+              @foreach($allEvent as $event)
+                @php
+                  $images = json_decode($event->images);
+                @endphp
+                <!-- Item -->
+                <li class="port-item mix {{ $event->category }}">
+                  <a href="">
+                    <div class="port-img-overlay">
+                      <img class="port-main-img" src="{{ isset($images[0]) ? "uploads/$event->id/$images[0]" : "images/no-image.png" }}" alt="img" >
                     </div>
-                  </div>
-                </a>
-              </li>
-                                           
-              <!-- Item -->
-              <li class="port-item mix photography">
-                <a href="portfolio-single1.html">
-                  <div class="port-img-overlay">
-                    <img class="port-main-img" src="welcome/images/projects-2-3col.jpg" alt="img" >
-                  </div>
-                  <div class="port-overlay-cont">
-                    <div class="port-title-cont2">
-                      <h3>Iceland Beach</h3>
-                      <span>photography</span>
+                    <div class="port-overlay-cont">
+                      <div class="port-title-cont2">
+                        <h3>{{ $event->name }}</h3>
+                        <span>{{ $event->category }}</span>
+                      </div>
                     </div>
-                  </div>
-                </a>
-              </li>
-                       
-              <!-- Item -->
-              <li class="port-item mix photography">
-                <a href="portfolio-single1.html">
-                  <div class="port-img-overlay">
-                    <img class="port-main-img" src="welcome/images/projects-3-3col.jpg" alt="img" >
-                  </div>
-                  <div class="port-overlay-cont">
-                    <div class="port-title-cont2">
-                      <h3>Metal Bridge</h3>
-                      <span>photography</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-                             
-              <!-- Item -->
-              <li class="port-item mix photography">
-                <a href="portfolio-single1.html">
-                  <div class="port-img-overlay">
-                    <img class="port-main-img" src="welcome/images/projects-6-3col.jpg" alt="img" >
-                  </div>
-                  <div class="port-overlay-cont">
-                    <div class="port-title-cont2">
-                      <h3>Black White Surfer</h3>
-                      <span>photography</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              
-              <!-- Item -->
-              <li class="port-item mix development">
-                <a href="portfolio-single1.html">
-                  <div class="port-img-overlay">
-                    <img class="port-main-img" src="welcome/images/projects-4-3col.jpg" alt="img" >
-                  </div>
-                  <div class="port-overlay-cont">
-                    <div class="port-title-cont2">
-                      <h3>Minimalist Watches</h3>
-                      <span>development</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
- 
-              <!-- Item -->
-              <li class="port-item mix photography">
-                <a href="portfolio-single1.html">
-                  <div class="port-img-overlay">
-                    <img class="port-main-img" src="welcome/images/projects-5-3col.jpg" alt="img" >
-                  </div>
-                  <div class="port-overlay-cont">
-                    <div class="port-title-cont2">
-                      <h3>Swimming Pool</h3>
-                      <span>photography</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
+                  </a>
+                </li>
+              @endforeach
 
             </ul>
           

@@ -20,6 +20,7 @@ class CreateEventsTable extends Migration
             $table->text('description');
 
             $table->date('date');
+            $table->string('category');
             $table->string('start_time');
             $table->string('end_time');
 

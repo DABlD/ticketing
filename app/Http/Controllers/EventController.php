@@ -61,6 +61,7 @@ class EventController extends Controller
         $data->name = $req->name;
         $data->description = $req->description;
         $data->date = $req->date;
+        $data->category = $req->category;
         $data->start_time = $req->start_time;
         $data->end_time = $req->end_time;
         $data->venue = $req->venue;

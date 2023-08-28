@@ -25,6 +25,7 @@
                     				<th>Venue</th>
                     				<th>Date</th>
                     				<th>Time</th>
+                    				<th>Category</th>
                     				<th>Tickets Sold</th>
                     				<th>Status</th>
                     				<th>Actions</th>
@@ -48,6 +49,7 @@
 	<link rel="stylesheet" href="{{ asset('css/datatables.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/datatables.bundle.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/splide.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
 	{{-- <link rel="stylesheet" href="{{ asset('css/swiper.min.css') }}"> --}}
 
 	{{-- <link rel="stylesheet" href="{{ asset('css/datatables.bootstrap4.min.css') }}"> --}}
@@ -71,6 +73,7 @@
 	<script src="{{ asset('js/datatables.min.js') }}"></script>
 	<script src="{{ asset('js/datatables.bundle.min.js') }}"></script>
 	<script src="{{ asset('js/splide.min.js') }}"></script>
+	<script src="{{ asset('js/select2.min.js') }}"></script>
 	{{-- <script src="{{ asset('js/swiper.min.js') }}"></script> --}}
     <script src="https://cdn.tiny.cloud/1/j6hjljyetenwq6iddgak38qqskvfp3f0c9mgqc68lj0rgzab/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 
@@ -94,6 +97,7 @@
 					{data: 'venue'},
 					{data: 'date'},
 					{data: 'start_time'},
+					{data: 'category'},
 					{data: 'ticket'},
 					{data: 'status'},
 					{data: 'actions'},
@@ -113,7 +117,7 @@
 						}
 					},
 					{
-						targets: [5],
+						targets: [6],
 						render: ticket => {
 							let string = "";
 
@@ -145,12 +149,52 @@
 				},
 				success: event => {
 					event = JSON.parse(event)[0];
-					showDetails(event);
+					let array = [];
+
+					$.ajax({
+						url: '{{ route('event.get') }}',
+						data: {
+							select: "category"
+						},
+						success: result => {
+							result = JSON.parse(result);
+							let array = [];
+
+							result.forEach(event => {
+								array.push(event.category);
+							});
+							
+							showDetails(event, array);
+						}
+					})
+
 				}
 			})
 		}
 
 		function create(){
+			$.ajax({
+				url: '{{ route('event.get') }}',
+				data: {
+					select: "category"
+				},
+				success: result => {
+					result = JSON.parse(result);
+					let array = [];
+
+					result.forEach(event => {
+						array.push(event.category);
+					});
+
+					create2(array);
+				}
+			})
+		}
+
+		function create2(categories){
+			categories.push("Concert", "Music Festival", "Workshop", "Bazaar", "Charity", "Product Launch");
+			categories = [...new Set(categories)];
+
 			Swal.fire({
 				title: "Enter Event Details",
 				html: `
@@ -168,6 +212,21 @@
 			            </div>
 			            <div class="col-md-3 iInput"></div>
 			        </div>
+
+			        <div class="row iRow">
+					    <div class="col-md-3 iLabel">
+					        Category
+					    </div>
+
+					    <div class="col-md-3 iInput">
+					        <select name="category" class="form-control">
+					        	<option value=""></option>
+					        </select>
+			        	</div>
+
+			        	<div class="col-md-6"></div>
+				    </div>
+
 					${input("venue", "Venue", null, 3, 9)}
 					${input("venue_address", "Address", null, 3, 9)}
 					<div class="row iRow">
@@ -186,6 +245,12 @@
 						altFormat: "F j, Y",
 						dateFormat: "Y-m-d",
 					});
+
+                    $('[name="category"]').select2({
+                        placeholder: "Select Category",
+                        data: categories,
+                        tags: true
+                    });
 
 					$("[name='start_time'], [name='end_time']").flatpickr({
 					    enableTime: true,
@@ -232,6 +297,7 @@
 							date: $("[name='date']").val(),
 							start_time: $("[name='start_time']").val(),
 							end_time: $("[name='end_time']").val(),
+							category: $("[name='category']").val(),
 							venue: $("[name='venue']").val(),
 							venue_address: $("[name='venue_address']").val(),
 
@@ -251,7 +317,10 @@
 			});
 		}
 
-		function showDetails(event){
+		function showDetails(event, categories){
+			categories.push("Concert", "Music Festival", "Workshop", "Bazaar", "Charity", "Product Launch");
+			categories = [...new Set(categories)];
+
 			Swal.fire({
 				title: 'Event Details',
 				html: `
@@ -260,6 +329,21 @@
 					${input("date", "Description", event.date, 3, 9)}
 					${input("start_time", "Start", event.start_time, 3, 9)}
 					${input("end_time", "End", event.end_time, 3, 9)}
+
+			        <div class="row iRow">
+					    <div class="col-md-3 iLabel">
+					        Category
+					    </div>
+
+					    <div class="col-md-3 iInput">
+					        <select name="category" class="form-control">
+					        	<option value=""></option>
+					        </select>
+			        	</div>
+
+			        	<div class="col-md-6"></div>
+				    </div>
+
 					${input("venue", "Venue", event.venue, 3, 9)}
 					${input("venue_address", "Address", event.venue_address, 3, 9)}
 					<div class="row iRow">
@@ -284,6 +368,12 @@
 						dateFormat: "Y-m-d",
 					});
 
+                    $('[name="category"]').select2({
+                        placeholder: "Select Category",
+                        data: categories,
+                        tags: true
+                    });
+
 					$("[name='start_time'], [name='end_time']").flatpickr({
 					    enableTime: true,
 					    noCalendar: true,
@@ -299,6 +389,7 @@
 				    });
 
 				    setTimeout(() => {
+				    	$('[name="category"]').val(event.category).trigger('change');
 			    		tinymce.get('description').setContent(event.description);
 				    }, 500);
 				},
@@ -328,6 +419,7 @@
 							date: $("[name='date']").val(),
 							start_time: $("[name='start_time']").val(),
 							end_time: $("[name='end_time']").val(),
+							category: $("[name='category']").val(),
 							venue: $("[name='venue']").val(),
 							venue_address: $("[name='venue_address']").val(),
 							description: tinymce.get('description').getContent(),

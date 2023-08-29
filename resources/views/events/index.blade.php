@@ -636,7 +636,7 @@
 					if(!result.length){
 						ticketString = `
 							<tr>
-								<td colspan="8">NOT SET</td>
+								<td colspan="9">NOT SET</td>
 							</tr>
 						`;
 					}

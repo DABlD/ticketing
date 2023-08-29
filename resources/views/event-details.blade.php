@@ -70,38 +70,17 @@
               <div id="main-menu">
                 <div class="navbar navbar-default" role="navigation">
 
+                  <center>
+                    <h2>Test</h2>
+                  </center>
+
                   <!-- MAIN MENU LIST -->
                   <nav class="collapse collapsing navbar-collapse right-1024">
                     <ul id="nav-onepage" class="nav navbar-nav">
-                      
+
                       <!-- MENU ITEM -->
                       <li class="current">
-                        <a href="#index-link"><div class="main-menu-title">Home</div></a>
-                      </li>
-                      
-                      <!-- MENU ITEM -->
-                      <li>
-                        <a href="#about-us-link"><div class="main-menu-title">About Us</div></a>
-                      </li>
-                      
-                      <!-- MENU ITEM -->
-                      <li>
-                        <a href="#services-link"><div class="main-menu-title">Services</div></a>
-                      </li>
-                      
-                      <!-- MENU ITEM -->
-                      <li>
-                        <a href="#portfolio-link"><div class="main-menu-title">Portfolio</div></a>
-                      </li>
-                      
-                      <!-- MENU ITEM -->
-                      <li>
-                        <a href="#contact-link"><div class="main-menu-title">Contact</div></a>
-                      </li>
-                      
-                      <!-- MENU ITEM -->
-                      <li>
-                        <a href="{{ url('/login') }}"><div class="main-menu-title">Login</div></a>
+                        <a href="{{ route("/") }}"><div class="main-menu-title">Home</div></a>
                       </li>
 
                     </ul>
@@ -132,13 +111,13 @@
                 <div id="rev_slider_202_1" class="rev_slider fullscreenbanner" style="display:none;" data-version="5.1.1RC">
                     <ul>
                         <!-- SLIDE  -->
-                        @foreach($data as $event)
-                          @php
-                            $images = json_decode($event->images);
-                          @endphp
+                        @php
+                          $images = json_decode($event->images);
+                        @endphp
+                        @foreach($images as $image)
                           <li data-index="rs-{{ $event->id }}" data-transition="slidingoverlayhorizontal" data-slotamount="default" data-easein="default" data-easeout="default" data-masterspeed="default" data-rotate="0" data-saveperformance="off">
                               <!-- MAIN IMAGE -->
-                              <img src="{{ isset($images[0]) ? "uploads/$event->id/$images[0]" : "images/no-image.png" }}" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="5" class="rev-slidebg" data-no-retina>
+                              <img src="{{ "uploads/$event->id/$image" }}" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="5" class="rev-slidebg" data-no-retina>
                               <!-- LAYERS -->
 
                               <!-- LAYER NR. 1 -->
@@ -160,7 +139,7 @@
                               </div> 
 
                               <!-- LAYER NR. 2 -->
-                              <div class="tp-caption font-poppins font-white tp-resizeme rs-parallaxlevel-6" id="slide-898-layer-2" style="z-index: 8; white-space: nowrap;"
+                              {{-- <div class="tp-caption font-poppins font-white tp-resizeme rs-parallaxlevel-6" id="slide-898-layer-2" style="z-index: 8; white-space: nowrap;"
                               data-fontsize="['24','24','24','20']" 
                               data-fontweight="300" 
                               data-height="none" 
@@ -180,7 +159,7 @@
                                 <a style="font-style: italic; text-decoration: underline;" href="{{ route('welcome.event', ["id" => $event->id]) }}">
                                   Register Here
                                 </a>
-                              </div>                            
+                              </div> --}}                     
                           </li>
                         @endforeach
                         
@@ -241,43 +220,9 @@
               <!-- TABS NAV -->
               <div class="row">
                 <div class="col-md-12">
-                  
-                  <br>
-
-                  <h1><b>
-                    ABOUT US
-                  </b></h1>
-
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula nulla sem, at tempus dui convallis vitae, Phasellus sollicitudin turpis mauris, posuere ultrices purus tristique sed.
+                  {!! html_entity_decode($event->description) !!}
                 </div>
               </div>
-
-              <div class="row">
-                <div class="col-md-6">
-                  
-                  <h2>
-                    Hassle free, Real time Registration Platform
-                  </h2>
-
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula nulla sem, at tempus dui convallis vitae, Phasellus sollicitudin turpis mauris, posuere ultrices purus tristique sed.
-
-
-                  <h2>
-                    Pre register ahead and create your digital Pass
-                  </h2>
-
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula nulla sem, at tempus dui convallis vitae, Phasellus sollicitudin turpis mauris, posuere ultrices purus tristique sed.
-                </div>
-
-
-                <!-- IMAGES -->
-                <div class="col-md-6 fes9-img-cont clearfix">
-                  <div class="fes16-img-center clearfix" style="width: 500px !important;">
-                    <img src="{{ asset('images/about-us2.png') }}" alt="img" class="wow fadeInUp" data-wow-delay="150ms" data-wow-duration="1s">
-                  </div>
-                </div>
-              </div>
-            
             </div>
           </div>
         </div>
@@ -359,11 +304,6 @@
                     <li>
                       <a href="#" class="filter active" data-filter="*">All</a>
                     </li>
-                    @foreach($categories as $category)
-                      <li>
-                        <a href="#" class="filter" data-filter=".{{ $category }}">{{ $category }}</a>
-                      </li>
-                    @endforeach
                   </ul>
                   
                 </div>
@@ -374,25 +314,6 @@
             <!-- ITEMS GRID -->
             <ul class="port-grid port-grid-3 clearfix" id="items-grid">
 
-              @foreach($allEvent as $event)
-                @php
-                  $images = json_decode($event->images);
-                @endphp
-                <!-- Item -->
-                <li class="port-item mix {{ $event->category }}">
-                  <a href="">
-                    <div class="port-img-overlay">
-                      <img class="port-main-img" src="{{ isset($images[0]) ? "uploads/$event->id/$images[0]" : "images/no-image.png" }}" alt="img" >
-                    </div>
-                    <div class="port-overlay-cont">
-                      <div class="port-title-cont2">
-                        <h3>{{ $event->name }}</h3>
-                        <span>{{ $event->category }}</span>
-                      </div>
-                    </div>
-                  </a>
-                </li>
-              @endforeach
 
             </ul>
           

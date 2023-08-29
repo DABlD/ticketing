@@ -366,7 +366,7 @@
                     </li>
                     @foreach($categories as $category)
                       <li>
-                        <a href="#" class="filter" data-filter="{{ $category }}">{{ $category }}</a>
+                        <a href="#" class="filter" data-filter=".{{ $category }}">{{ $category }}</a>
                       </li>
                     @endforeach
                   </ul>

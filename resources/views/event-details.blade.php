@@ -71,7 +71,7 @@
                 <div class="navbar navbar-default" role="navigation">
 
                   <center>
-                    <h2>Test</h2>
+                    <h4 style="color: white; font-size: 50px; text-shadow: 1px 1px black;">{{ $event->name }}</h4>
                   </center>
 
                   <!-- MAIN MENU LIST -->
@@ -79,7 +79,7 @@
                     <ul id="nav-onepage" class="nav navbar-nav">
 
                       <!-- MENU ITEM -->
-                      <li class="current">
+                      <li class="" style="position: absolute; top: 0; right: 10px;">
                         <a href="{{ route("/") }}"><div class="main-menu-title">Home</div></a>
                       </li>
 
@@ -135,7 +135,7 @@
                               data-width="none" 
                               data-x="['left','left','left','left']" 
                               data-y="['center','center','center','center']">
-                                <p style="text-shadow: 3px 3px black;">{{ $event->name }}</p>
+                                {{-- <p style="text-shadow: 3px 3px black;">{{ $event->name }}</p> --}}
                               </div> 
 
                               <!-- LAYER NR. 2 -->
@@ -214,7 +214,7 @@
   
         <!-- FEATURES 16 TABS 2 -->
         <div id="about-us-link" class="page-section">
-          <div class="bg-yellow mb-100">
+          <div class="bg-yellow" style="padding-bottom: 50px;">
             <div class="container">
               
               <!-- TABS NAV -->
@@ -227,7 +227,6 @@
           </div>
         </div>
 
-        <!-- FEATURES 17 OUR SERVICES 2 -->
         <div id="services-link" class="page-section pt-160-b-120-cont" style="padding-top: 0px; padding-bottom: 0px;">
           <div class="container">
 
@@ -237,10 +236,14 @@
                 <br>
 
                 <h1><b>
-                  OUR SERVICES
+                  TICKETS
                 </b></h1>
 
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula nulla sem, at tempus dui convallis vitae, Phasellus sollicitudin turpis mauris, posuere ultrices purus tristique sed.
+                <table>
+                  <tr>
+                    <td></td>
+                  </tr>
+                </table>
               </div>
             </div>
 
@@ -317,79 +320,6 @@
 
             </ul>
           
-          </div>
-        </div>
-        
-        <!-- VIEW MORE PROJECTS  -->
-        <div class="port-view-more-cont">
-          <a class="port-view-more" href="portfolio-masonry-4col.html">View All Projects</a>
-        </div>
-        <!-- END PORTFOLIO SECTION -->
-        
-        <!-- COUNTERS 2 -->
-        <div id="counter-1" class="page-section p-80-cont bg-gray">
-          <div class="container">
-        
-            <div  class="row text-center">
-                            
-              <!-- Item -->
-              <div class="col-xs-6 col-sm-3 border-none">
-                {{-- <div class="count-number">
-                </div>
-                <div class="count-descr">
-                  <span class="count-title"></span>
-                </div> --}}
-              </div>
-
-              <div class="col-xs-6 col-sm-3 border-none">
-                <div class="count-number">
-                  75
-                </div>
-                <div class="count-descr">
-                  <span class="count-title">Total Events</span>
-                </div>
-              </div>
-              
-              <!-- Item -->
-              <div class="col-xs-6 col-sm-3 border-none">
-                <div class="count-number">
-                 450
-                </div>
-                <div class="count-descr">
-                  <span class="count-title">Total Attendees</span>
-                </div>
-              </div>
-                            
-              <!-- Item -->
-              <div class="col-xs-6 col-sm-3 border-none">
-                {{-- <div class="count-number">
-                </div>
-                <div class="count-descr">
-                  <span class="count-title"></span>
-                </div> --}}
-              </div>
-              
-              <!-- Item -->
-              {{-- <div class="col-xs-6 col-sm-3 border-none">
-                <div class="count-number">
-                  151
-                </div>
-                <div class="count-descr">
-                  <span class="count-title">Projects Done</span>
-                </div>
-              </div> --}}
-              
-              <!-- Item -->
-              {{-- <div class="col-xs-6 col-sm-3 border-none">
-                <div class="count-number">
-                 768
-                </div>
-                <div class="count-descr">
-                  <span class="count-title">Hours Of Code</span>
-                </div>
-              </div>   --}}
-              
-            </div>
           </div>
         </div>
   

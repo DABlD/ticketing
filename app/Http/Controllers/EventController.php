@@ -110,6 +110,32 @@ class EventController extends Controller
         $this->log("Uploaded Images for Event ID: " . $event->id);
     }
 
+    public function uploadTicketImage(Request $req){
+        $file = $req->file('image');
+
+
+        $type = strtoupper($file->getClientOriginalExtension());
+        $name = "TicketImage$req->id.jpg";
+
+        $img = Image::make($file)->encode('jpg');
+        $img->orientate();
+
+        $save_path = public_path().'/uploads/' . $req->id;
+
+        if (!file_exists($save_path)) {
+            mkdir($save_path, 666, true);
+        }
+
+        $img->save($save_path . '/' . $name);
+
+        $event = Event::find($req->id);
+        $event->ticket = $name;
+
+        echo $event->save();
+
+        $this->log("Uploaded Images for Event ID: " . $event->id);
+    }
+
     public function delete(Request $req){
         Event::find($req->id)->delete();
         $this->log("Deleted Event ID: " . $req->id);

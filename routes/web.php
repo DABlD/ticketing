@@ -94,6 +94,7 @@ Route::group([
                 Route::post("delete/", ucfirst($cname) . "Controller@delete")->name('delete');
                 Route::post("update/", ucfirst($cname) . "Controller@update")->name('update');
                 Route::post("uploadImages/", ucfirst($cname) . "Controller@uploadImages")->name('uploadImages');
+                Route::post("uploadTicketImage/", ucfirst($cname) . "Controller@uploadTicketImage")->name('uploadTicketImage');
             }
         );
 

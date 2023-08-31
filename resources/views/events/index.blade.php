@@ -620,8 +620,22 @@
 		    });
 		}
 
+		async function uploadTicketImage(formData, id){
+		    await fetch('{{ route('event.uploadTicketImage') }}', {
+		        method: "POST", 
+		        body: formData,
+		    }).then(result => {
+		        console.log(result);
+		        ss("Successfully Uploaded Image", "Refreshing");
+		        setTimeout(() => {
+		            // window.location.reload();
+		            viewTickets(id);
+		        }, 1200);
+		    });
+		}
+
 		// TICKETS
-		function viewTickets(id){
+		function viewTickets(id, ticketImage){
 			$.ajax({
 				url: '{{ route('ticket.get') }}',
 				data: {
@@ -653,7 +667,7 @@
 									<td>${ticket.sale_price ? "₱" + ticket.sale_price : "-"}</td>
 									<td>${ticket.sale_until ? toDate(ticket.sale_until) : "-"}</td>
 									<td>
-										<a class="btn btn-success" data-toggle="tooltip" title="Edit" onclick="editTicket(${id}, ${ticket.id})">
+										<a class="btn btn-success" data-toggle="tooltip" title="Edit" onclick="editTicket(${id}, ${ticket.id}, '${ticketImage}')">
 											<i class="fas fa-pencil"></i>
 										</a>
 									</td>
@@ -668,7 +682,11 @@
 
 							<div style="height: 40px;">
 								<a class="float-right btn btn-success btn-sm" data-toggle="tooltip" title="Add Ticket" onclick="addTicket(${id})">
-									<i class="fas fa-plus fa-2xl"></i>
+									<i class="fas fa-plus"></i>
+								</a>
+
+								<a class="float-right btn btn-info btn-sm" data-toggle="tooltip" title="Upload Image" onclick="ticketImage(${id}, '${ticketImage}')" style="margin-right: 5px;">
+									<i class="fas fa-image"></i>
 								</a>
 							</div>
 
@@ -697,6 +715,80 @@
 					})
 				}
 			})
+		}
+
+		function ticketImage(id, image = null){
+			Swal.fire({
+				title: "View Images",
+				showDenyButton: true,
+				denyButtonText: 'Upload Image',
+				denyButtonColor: successColor,
+     			customClass: 'swal-height',
+				html: `
+					<img id="preview" alt="No image uploaded" src="uploads/${id}/${image}">
+				`,
+			}).then(result => {
+				if(result.isDenied){
+					Swal.fire({
+						title: "Upload Image",
+						input: "file",
+						inputAttributes: {
+							'accept': 'image/*'
+						},
+						html: `
+							<img id="preview">
+						`,
+						showCancelButton: true,
+						cancelButtonColor: errorColor,
+						confirmButtonText: "Upload",
+						preConfirm: () => {
+						    swal.showLoading();
+						    return new Promise(resolve => {
+						    	let bool = true;
+
+					            if($('.swal2-file').val().length == 0){
+					                Swal.showValidationMessage('No Image Selected');
+					            }
+					            else{
+					            	let bool = false;
+					            }
+
+					            bool ? setTimeout(() => {resolve()}, 500) : "";
+						    });
+						},
+						didOpen: () => {
+							$('.swal2-file').on('change', e => {
+								let fileInput = e.target;
+								
+								if(!$('#preview').is(':visible'))
+								{
+								    $('#preview').fadeIn();
+								}
+
+								var fr = new FileReader();
+								fr.readAsDataURL(document.getElementsByClassName("swal2-file")[0].files[0]);
+
+								fr.onload = function (e) {
+								    document.getElementById("preview").src = e.target.result;
+								};
+							});
+						}
+					}).then(result2 => {
+						if(result2.value){
+				            swal.showLoading();
+
+				            let formData = new FormData();
+				            formData.append('id', id);
+
+				            formData.append(`image`, $('.swal2-file').prop('files')[0]);
+				            formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+
+							uploadTicketImage(formData, id);
+						}
+						// showImages(id, imageString);
+					});
+				}
+			});
 		}
 
 		function addTicket(id){
@@ -761,7 +853,7 @@
 			});
 		}
 
-		function editTicket(id, tid){
+		function editTicket(id, tid, image){
 			$.ajax({
 				url: '{{ route('ticket.get') }}',
 				data: {
@@ -824,7 +916,7 @@
 								success: () => {
 									ss("Success");
 									setTimeout(() => {
-										viewTickets(id);
+										viewTickets(id, image);
 									}, 1000);
 								}
 							})

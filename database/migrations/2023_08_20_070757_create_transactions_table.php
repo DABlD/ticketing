@@ -15,7 +15,26 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('event_id');
+            
+            $table->string('fname')->nullable();
+            $table->string('mname')->nullable();
+            $table->string('lname')->nullable();
+            
+            $table->string('gender')->nullable();
+            $table->date('birthday')->nullable();
+
+            $table->string('contact')->nullable();
+            $table->string('email')->unique()->nullable();
+            
+            $table->text('address')->nullable();
+
             $table->timestamps();
+
+            $table->foreign('event_id')
+                  ->references('id')
+                  ->on('events');
+
         });
     }
 

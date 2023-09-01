@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 
+use Illuminate\Support\Facades\Crypt;
 use App\Models\{Transaction};
 
 class ApiController extends Controller
@@ -62,6 +63,19 @@ class ApiController extends Controller
         $data->email = $req->email;
         $data->address = $req->address;
 
-        echo $data->save();
+        if($data->save()){
+            $data->load('ticket.event');
+            $data->crypt = Crypt::encryptString($data->id);
+
+            echo json_encode($data);
+        }
+        else{
+            // CREATE CODE FOR OUT OF STOCK
+            echo "oos";
+        }
+    }
+
+    public function verify(Request $req){
+        $id = Crypt::decryptString($req->crypt);
     }
 }

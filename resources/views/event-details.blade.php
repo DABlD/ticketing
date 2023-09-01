@@ -512,6 +512,8 @@
 
     <!-- jQuery  -->
     <script src="welcome/js/jquery.min.js"></script>
+    <script src="welcome/js/qrious.min.js"></script>
+    <script src="welcome/js/html2canvas.min.js"></script>
 
     <script>
       $('#stock').hide();
@@ -551,6 +553,8 @@
           width: "70%",
           showCancelButton: true,
           cancelButtonColor: errorColor,
+          confirmButtonText: "Register",
+          allowOutsideClick: false,
           html: `
             ${input("fname", "First Name", null, 2, 10)}
             ${input("mname", "Middle Name", null, 2, 10)}
@@ -616,8 +620,80 @@
 
                 _token: $('meta[name="csrf-token"]').attr('content')
               },
-              success: () => {
-                ss("Successfully Registered");
+              success: result => {
+                if(result == "oos"){
+                  se("Sorry you just missed it. Ticket is now sold out.");
+                }
+                else{
+                  result = JSON.parse(result);
+
+                  ss("Successfully Registered");
+                  setTimeout(() => {
+                    Swal.fire({
+                      title: "Please save your QR Code",
+                      @desktop
+                      width: "50%",
+                      @enddesktop
+                      @mobile
+                      width: "80%",
+                      @endmobile
+                      confirmButtonText: "Save",
+                      confirmButtonColor: successColor,
+                      allowOutsideClick: false,
+                      html: `
+                        <div id="canvas-wrapper">
+                          <div class="row">
+                            <div class="col-md-6">
+                              <canvas id="qr">
+                              </canvas>
+                            </div>
+
+                            <div class="col-md-6" style="text-align: left;">
+                              <h5>
+                                Event: ${result.ticket.event.name}
+                                <br>
+                                Ticket Type: ${result.ticket.type}
+                                <br>
+                                Name: ${result.fname} ${result.mname} ${result.lname}
+                                <br>
+                                Contact: ${result.contact}
+                                <br>
+                                Email: ${result.email}
+                              </h5>
+                            </div>
+                          </div>
+                        </div>
+                      `,
+                      preConfirm: () => {
+                        swal.showLoading();
+                        return new Promise(resolve => {
+                          let bool = true;
+
+                          setTimeout(() => {
+                            html2canvas(document.getElementById('canvas-wrapper')).then(canvas => {
+                              var myImage = canvas.toDataURL();
+
+                              var link = document.createElement('a');
+                              link.download = `${result.ticket.event.name}-Ticket-${result.fname}-${result.lname}.png`;
+                              link.href = myImage;
+                              link.click();
+                            });
+
+                            bool ? setTimeout(() => {resolve()}, 500) : "";
+                          }, 500);
+
+                        });
+                      },
+                      didOpen: () => {
+                        let qr = new QRious({
+                          element: document.getElementById('qr'),
+                          value: '{{ route("api.verify") }}?crypt=' + result.crypt,
+                          size: "300",
+                        });
+                      }
+                    })
+                  }, 1000);
+                }
               }
             })
           }

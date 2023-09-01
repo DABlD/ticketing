@@ -29,6 +29,7 @@ Route::group([
     ], function () use($cname){
         Route::get("get", ucfirst($cname) . "Controller@get")->name('get');
         Route::post("store", ucfirst($cname) . "Controller@store")->name('store');
+        Route::get("verify", ucfirst($cname) . "Controller@verify")->name('verify');
     }
 );
 

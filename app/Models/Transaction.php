@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Event;
+use App\Models\Ticket;
 
 class Transaction extends Model
 {
@@ -22,7 +22,7 @@ class Transaction extends Model
         'created_at', 'updated_at', 'deleted_at', 'birthday'
     ];
 
-    public function event(){
-        return $this->belongsTo(Event::class, 'id', 'event_id');
+    public function ticket(){
+        return $this->belongsTo(Ticket::class, 'ticket_id', 'id');
     }
 }

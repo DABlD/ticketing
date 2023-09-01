@@ -561,9 +561,11 @@
 
               if(result.stock <= 0){
                 $('#stock').show();
+                $('#register').prop('disabled', true);
               }
               else{
                 $('#stock').hide();
+                $('#register').prop('disabled', false);
               }
             }
           })
@@ -645,6 +647,8 @@
               success: result => {
                 if(result == "oos"){
                   se("Sorry you just missed it. Ticket is now sold out.");
+                  $('#stock').show();
+                  $('#register').prop('disabled', true);
                 }
                 else{
                   result = JSON.parse(result);

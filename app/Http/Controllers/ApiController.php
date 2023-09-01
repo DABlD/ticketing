@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 
 use Illuminate\Support\Facades\Crypt;
-use App\Models\{Transaction};
+use App\Models\{Transaction, Ticket};
 
 class ApiController extends Controller
 {
@@ -52,26 +52,27 @@ class ApiController extends Controller
     }
 
     public function store(Request $req){
-        $data = new Transaction();
-        $data->ticket_id = $req->ticket_id;
-        $data->fname = $req->fname;
-        $data->mname = $req->mname;
-        $data->lname = $req->lname;
-        $data->gender = $req->gender;
-        $data->birthday = $req->birthday;
-        $data->contact = $req->contact;
-        $data->email = $req->email;
-        $data->address = $req->address;
+        $temp = Ticket::find($req->ticket_id);
 
-        if($data->save()){
+        if($temp->stock <= 0){
+            echo "oos";
+        }
+        else{
+            $data = new Transaction();
+            $data->ticket_id = $req->ticket_id;
+            $data->fname = $req->fname;
+            $data->mname = $req->mname;
+            $data->lname = $req->lname;
+            $data->gender = $req->gender;
+            $data->birthday = $req->birthday;
+            $data->contact = $req->contact;
+            $data->email = $req->email;
+            $data->address = $req->address;
+
             $data->load('ticket.event');
             $data->crypt = Crypt::encryptString($data->id);
 
             echo json_encode($data);
-        }
-        else{
-            // CREATE CODE FOR OUT OF STOCK
-            echo "oos";
         }
     }
 

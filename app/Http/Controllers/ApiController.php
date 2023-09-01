@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 
+use App\Models\{Transaction};
+
 class ApiController extends Controller
 {
     public function get(Request $req){
@@ -46,5 +48,20 @@ class ApiController extends Controller
         }
 
         echo json_encode($array);
+    }
+
+    public function store(Request $req){
+        $data = new Transaction();
+        $data->ticket_id = $req->ticket_id;
+        $data->fname = $req->fname;
+        $data->mname = $req->mname;
+        $data->lname = $req->lname;
+        $data->gender = $req->gender;
+        $data->birthday = $req->birthday;
+        $data->contact = $req->contact;
+        $data->email = $req->email;
+        $data->address = $req->address;
+
+        echo $data->save();
     }
 }

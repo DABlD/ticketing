@@ -56,7 +56,7 @@ class TransactionController extends Controller
 
     public function store(Request $req){
         $data = new Transaction();
-        $data->event_id = $req->event_id;
+        $data->ticket_id = $req->ticket_id;
         $data->fname = $req->fname;
         $data->mname = $req->mname;
         $data->lname = $req->lname;

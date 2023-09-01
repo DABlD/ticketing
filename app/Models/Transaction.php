@@ -13,7 +13,7 @@ class Transaction extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        "event_id","fname","mname",
+        "ticket_id","fname","mname",
         "lname","gender","birthday",
         "contact","email","address",
     ];

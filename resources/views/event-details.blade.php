@@ -10,6 +10,7 @@
     <meta name="author" content="ABCgomel">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="theme-color" content="#2a2b2f">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     
     <!-- FAVICONS -->
     <link rel="shortcut icon" href="welcome/images/favicon.png">
@@ -28,6 +29,8 @@
     <link rel="stylesheet" href="welcome/css/animate.min.css">
     <link rel="stylesheet" href="fonts/fontawesome.min.css">
     <link rel="stylesheet" href="css/sweetalert2.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/flatpickr.min.css">
 
     <style>
       .btn-secondary {
@@ -48,6 +51,18 @@
         color: #fff;
         background-color: #545b62;
         border-color: #4e555b;
+      }
+
+      .form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: #cdcdcd;
+        opacity: 1;
+      }
+
+      .iLabel{
+        color: black;
+        font-size: 14px;
+        font-weight: bold;
+        margin-top: 10px !important;
       }
     </style>
     
@@ -526,14 +541,98 @@
       });
 
       $('#register').on('click', e => {
-        console.log('clicked');
-        Swal.fire('test');
+        Swal.fire({
+          title: "Enter Details",
+          width: "70%",
+          showCancelButton: true,
+          cancelButtonColor: errorColor,
+          html: `
+            ${input("fname", "First Name", null, 2, 10)}
+            ${input("mname", "Middle Name", null, 2, 10)}
+            ${input("lname", "Last Name", null, 2, 10)}
+
+            <div class="row iRow">
+                <div class="col-md-2 iLabel">
+                    Gender
+                </div>
+                <div class="col-md-10 iInput" style="margin-top: 5px;">
+                    <div class="col-md-1 iInput">
+                        ${radio("gender", "Male", "checked")}
+                    </div>
+                    <div class="col-md-1 iInput">
+                        ${radio("gender", "Female")}
+                    </div>
+                </div>
+            </div></br>
+
+            ${input("birthday", "Birthday", null, 2, 10)}
+            ${input("contact", "Contact", null, 2,10)}
+            ${input("email2", "Email", null, 2, 10, 'email')}
+            ${input("address", "Address", null, 2, 10)}
+          `,
+          didOpen: () => {
+            $("[name='birthday']").flatpickr({
+              altInput: true,
+              altFormat: "F j, Y",
+              dateFormat: "Y-m-d",
+            });
+          },
+          preConfirm: () => {
+            swal.showLoading();
+            return new Promise(resolve => {
+              let bool = true;
+
+              if($('.swal2-container input:placeholder-shown').length){
+                  Swal.showValidationMessage('Fill all fields');
+              }
+              else{
+                let bool = false;
+              }
+
+              bool ? setTimeout(() => {resolve()}, 500) : "";
+            });
+          },
+        }).then(result => {
+          if(result.value){
+            swal.showLoading();
+            $.ajax({
+              url: "{{ route('api.store') }}",
+              type: "POST",
+              data: {
+                ticket_id: parseInt($('.btn-secondary.active input').attr('id')),
+                fname: $("[name='fname']").val(),
+                mname: $("[name='mname']").val(),
+                lname: $("[name='lname']").val(),
+                gender: $('[name="gender"]:checked').val(),
+                birthday: $("[name='birthday']").val(),
+                contact: $("[name='contact']").val(),
+                email: $("[name='email2']").val(),
+                address: $("[name='address']").val(),
+
+                _token: $('meta[name="csrf-token"]').attr('content')
+              },
+              success: () => {
+                ss("Successfully Registered");
+              }
+            })
+          }
+        });
+        // END SWAL
       });
+
+      function radio(name, value, checked = ""){
+          return `
+              <input type="radio" name="${name}" value="${value}" ${checked}>
+              <label for="${name}">${value}</label><br>
+          `;
+      }
     </script>
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="welcome/js/bootstrap.min.js"></script>   
     <script src="js/sweetalert2.min.js"></script>   
+    <script src="js/custom.js"></script>   
+    <script src="js/flatpickr.min.js"></script>   
 
     <!-- MAGNIFIC POPUP -->
     <script src="welcome/js/magnific-popup.min.js"></script>

@@ -15,7 +15,9 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('event_id');
+
+            // EVENT IS USED FOR TICKET ID NOW
+            $table->unsignedBigInteger('ticket_id');
             
             $table->string('fname')->nullable();
             $table->string('mname')->nullable();
@@ -25,15 +27,15 @@ class CreateTransactionsTable extends Migration
             $table->date('birthday')->nullable();
 
             $table->string('contact')->nullable();
-            $table->string('email')->unique()->nullable();
-            
+            $table->string('email')->nullable();
+
             $table->text('address')->nullable();
 
             $table->timestamps();
 
-            $table->foreign('event_id')
+            $table->foreign('ticket_id')
                   ->references('id')
-                  ->on('events');
+                  ->on('tickets');
 
         });
     }

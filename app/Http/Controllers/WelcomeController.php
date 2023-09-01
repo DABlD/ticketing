@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{Event};
+use App\Models\{Event, Ticket};
 
 class WelcomeController extends Controller
 {
@@ -22,10 +22,14 @@ class WelcomeController extends Controller
 
     public function event(Request $req){
         $event = Event::find($req->id);
+        $tickets = Ticket::where('event_id', $req->id)->get();
+        $free = $tickets->count() ? false : true;
 
         return $this->_view('event-details', [
             'title' => $event->name,
-            'event' => $event
+            'event' => $event,
+            'tickets' => $tickets,
+            'free' => $free
         ]);
     }
 

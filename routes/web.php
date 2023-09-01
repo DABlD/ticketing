@@ -22,6 +22,14 @@ Route::get('/event-details', "WelcomeController@event")->name("welcome.event");
 //    return redirect()->route('login');
 // });
 
+$cname = "api";
+Route::group([
+        'as' => "$cname.",
+        'prefix' => "$cname/"
+    ], function () use($cname){
+        Route::get("get", ucfirst($cname) . "Controller@get")->name('get');
+    }
+);
 
 Route::group([
         'middleware' => 'auth',

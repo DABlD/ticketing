@@ -26,6 +26,30 @@
     <link rel="stylesheet" href="welcome/css/icon-fonts.min.css" > 
     <link rel="stylesheet" href="welcome/css/styles.min.css" >
     <link rel="stylesheet" href="welcome/css/animate.min.css">
+    <link rel="stylesheet" href="fonts/fontawesome.min.css">
+    <link rel="stylesheet" href="css/sweetalert2.min.css">
+
+    <style>
+      .btn-secondary {
+        color: black;
+/*        background-color: #6c757d;*/
+        border-color: #6c757d;
+        box-shadow: none;
+        margin-right: 5px;
+      }
+
+      .btn-secondary:hover{
+        color: #fff;
+        background-color: #545b62;
+        border-color: #4e555b;
+      }
+
+      .btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle {
+        color: #fff;
+        background-color: #545b62;
+        border-color: #4e555b;
+      }
+    </style>
     
   </head>
   <body>
@@ -149,7 +173,7 @@
   
         <!-- FEATURES 16 TABS 2 -->
         <div id="about-us-link" class="page-section">
-          <div class="bg-yellow" style="padding-bottom: 50px;">
+          <div class="bg-yellow" style="padding-bottom: 50px; padding-top: 50px;">
             <div class="container">
               
               <!-- TABS NAV -->
@@ -189,34 +213,103 @@
               <!-- IMAGES -->
               <div class="col-md-6 fes9-img-cont clearfix">
                 <div class="fes16-img-center clearfix">
-                  <img src="{{ asset('images/login.png') }}" alt="img" class="wow fadeInUp" data-wow-delay="150ms" data-wow-duration="1s">
+                  <img src="{{ isset($event->ticket) ? asset("uploads/$event->id/$event->ticket") : asset("images/no-image-portrait.png") }}" alt="img" class="wow fadeInUp" data-wow-delay="150ms" data-wow-duration="1s" style="height: 100%;">
                 </div>
               </div>
 
               <div class="col-md-6">
                 
-                <h2>
-                  Event registration made easy, Digitally designed to systematically facilitate and digitally organize your events.
-                </h2>
+                <h1>
+                  {{ $event->name }}
+                </h1>
 
                 <div class="row">
 
-                  <!-- IMAGES -->
-                  <div class="col-md-6 fes9-img-cont clearfix">
-                    <div class="fes16-img-center clearfix" style="width: 180px; height: 200px !important;">
-                      <img src="{{ asset('images/image1.png') }}" alt="img" class="wow fadeInUp" data-wow-delay="150ms" data-wow-duration="1s">
-                    </div>
+                  <h3>
+                  {{-- PRICE --}}
+                  @if($free)
+                    ₱0.00
+                  @else
+                    ₱
+                    <span id="price">
+                      {{ number_format($tickets->first()->price, 2, ".") }}
+                    </span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="stock" style="color: red;">Sold Out</span>
+                  @endif
+                  </h3>
+
+                  <br>
+
+                  {{-- BUTTONS --}}
+
+                  Ticket Type
+                  <br>
+                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    @if($free)
+                      <label class="btn btn-secondary active">
+                        <input type="radio" name="ticketType" checked> Free
+                      </label>
+                    @else
+                      @foreach($tickets as $ticket)
+                        <label class="btn btn-secondary {{ $loop->first ? "active" : "" }}">
+                          <input type="radio" name="ticketType" id="{{ $ticket->id }}" data-price="{{ $ticket->price }}"> {{ $ticket->type }}
+                        </label>
+                      @endforeach
+                    @endif
                   </div>
 
-                  <!-- IMAGES -->
-                  <div class="col-md-6 fes9-img-cont clearfix">
-                    <div class="fes16-img-center clearfix" style="width: 180px; height: 200px !important;">
-                      <img src="{{ asset('images/image2.png') }}" alt="img" class="wow fadeInUp" data-wow-delay="150ms" data-wow-duration="1s">
-                    </div>
+                  {{-- <br>
+                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    @if($free)
+                      <label class="btn btn-secondary active">
+                        <input type="radio" name="ticketType" checked> Free
+                      </label>
+                    @else
+                      @foreach($tickets as $ticket)
+                        <label class="btn btn-secondary {{ $loop->first ? "active" : "" }}">
+                          <input type="radio" name="ticketType" id="{{ $ticket->id }}" data-price="{{ $ticket->price }}"> {{ $ticket->type }}
+                        </label>
+                      @endforeach
+                    @endif
+                  </div> --}}
+
+                </div>
+
+
+                {{-- EVENT DETAILS --}}
+                <br>
+                <br>
+                <div class="row">
+                  <div class="col-md-1">
+                    <i class='fas fa-calendar-day fa-2x'></i>
+                  </div>
+                  <div class="col-md-6">
+                    {{ now()->parse($event->date)->format("F j, Y") }}
+                    <br>
+                    {{ now()->parse($event->start_time)->format("h:i A") }} - {{ now()->parse($event->end_time)->format("h:i A") }}
+                  </div>
+                </div>
+                <br>
+                <div class="row">
+                  <div class="col-md-1">
+                    <i class='fas fa-map-marked fa-2x'></i>
+                  </div>
+                  <div class="col-md-6">
+                    {{ $event->venue }} at {{ $event->venue_address }}
                   </div>
                 </div>
 
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula nulla sem, at tempus dui convallis vitae, Phasellus sollicitudin turpis mauris, posuere ultrices purus tristique sed.
+                <br>
+                <br>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <button class="btn btn-info" id="register">Register Now</button>
+                  </div>
+                </div>
+
+
               </div>
             </div>
 
@@ -405,8 +498,42 @@
     <!-- jQuery  -->
     <script src="welcome/js/jquery.min.js"></script>
 
+    <script>
+      $('#stock').hide();
+
+      $('[name="ticketType"]').on('change', e => {
+          let price = e.target.dataset.price;
+          $('#price').html(parseFloat(price).toFixed(2));
+
+          $.ajax({
+            url: "{{ route('api.get') }}",
+            data: {
+              where: ['id', e.target.id],
+              select: "stock",
+              table: 'tickets'
+            },
+            success: result => {
+              result = JSON.parse(result)[0];
+
+              if(result.stock <= 0){
+                $('#stock').show();
+              }
+              else{
+                $('#stock').hide();
+              }
+            }
+          })
+      });
+
+      $('#register').on('click', e => {
+        console.log('clicked');
+        Swal.fire('test');
+      });
+    </script>
+
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="welcome/js/bootstrap.min.js"></script>   
+    <script src="js/sweetalert2.min.js"></script>   
 
     <!-- MAGNIFIC POPUP -->
     <script src="welcome/js/magnific-popup.min.js"></script>

@@ -370,7 +370,7 @@
                 @endphp
                 <!-- Item -->
                 <li class="port-item mix {{ $event->category }}">
-                  <a href="">
+                  <a href="{{ route('welcome.event', ["id" => $event->id]) }}">
                     <div class="port-img-overlay">
                       <img class="port-main-img" src="{{ isset($images[0]) ? "uploads/$event->id/$images[0]" : "images/no-image.png" }}" alt="img" >
                     </div>

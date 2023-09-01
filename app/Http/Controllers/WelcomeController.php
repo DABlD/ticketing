@@ -25,11 +25,18 @@ class WelcomeController extends Controller
         $tickets = Ticket::where('event_id', $req->id)->get();
         $free = $tickets->count() ? false : true;
 
+        $data = Event::where('date', '>=', now())->where('id', '!=', $req->id)->orderByDesc('date')->get();
+        $allEvent = Event::where('id', '!=', $req->id)->get();
+        $categories = $allEvent->pluck('category')->unique();
+
         return $this->_view('event-details', [
             'title' => $event->name,
             'event' => $event,
             'tickets' => $tickets,
-            'free' => $free
+            'free' => $free,
+            'data' => $data,
+            'allEvent' => $allEvent,
+            'categories' => $categories
         ]);
     }
 

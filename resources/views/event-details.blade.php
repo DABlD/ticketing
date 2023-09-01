@@ -86,7 +86,7 @@
             <!-- LOGO --> 
             <div class="logo-container-2">
                 <div class="logo-2">
-                  <a href="index.html" class="clearfix">
+                  <a href="{{ route('/') }}" class="clearfix">
                     <img src="{{ asset('images/logo.png') }}" class="logo-img" alt="Logo">
                   </a>
                 </div>
@@ -340,7 +340,7 @@
               
                 <!-- TITLE -->
                 <div class="mb-10">
-                  <h2 class="section-title2 font-light">Recent Events</h2>
+                  <h2 class="section-title2 font-light">Other Events</h2>
                 </div>
    
                 <!-- PORTFOLIO FILTER -->
@@ -350,6 +350,11 @@
                     <li>
                       <a href="#" class="filter active" data-filter="*">All</a>
                     </li>
+                    @foreach($categories as $category)
+                      <li>
+                        <a href="#" class="filter" data-filter=".{{ $category }}">{{ $category }}</a>
+                      </li>
+                    @endforeach
                   </ul>
                   
                 </div>
@@ -359,8 +364,25 @@
             
             <!-- ITEMS GRID -->
             <ul class="port-grid port-grid-3 clearfix" id="items-grid">
-
-
+              @foreach($allEvent as $event)
+                @php
+                  $images = json_decode($event->images);
+                @endphp
+                <!-- Item -->
+                <li class="port-item mix {{ $event->category }}">
+                  <a href="">
+                    <div class="port-img-overlay">
+                      <img class="port-main-img" src="{{ isset($images[0]) ? "uploads/$event->id/$images[0]" : "images/no-image.png" }}" alt="img" >
+                    </div>
+                    <div class="port-overlay-cont">
+                      <div class="port-title-cont2">
+                        <h3>{{ $event->name }}</h3>
+                        <span>{{ $event->category }}</span>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+              @endforeach
             </ul>
           
           </div>

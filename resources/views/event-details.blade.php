@@ -247,7 +247,7 @@
                   @else
                     ₱
                     <span id="price">
-                      {{ number_format($tickets->first()->price, 2, ".") }}
+                      {{ number_format($tickets->first()->price, 2, ".", ",") }}
                     </span>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <span id="stock" style="color: red;">Sold Out</span>
@@ -516,9 +516,14 @@
     <script>
       $('#stock').hide();
 
+      const formatter = new Intl.NumberFormat('en-US', {
+        maximumFractionDigits: 2,
+        minimumFractionDigits: 2,
+      }); 
+
       $('[name="ticketType"]').on('change', e => {
           let price = e.target.dataset.price;
-          $('#price').html(parseFloat(price).toFixed(2));
+          $('#price').html(formatter.format(price));
 
           $.ajax({
             url: "{{ route('api.get') }}",

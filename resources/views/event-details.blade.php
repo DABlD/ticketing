@@ -135,80 +135,15 @@
                               data-width="none" 
                               data-x="['left','left','left','left']" 
                               data-y="['center','center','center','center']">
-                                {{-- <p style="text-shadow: 3px 3px black;">{{ $event->name }}</p> --}}
                               </div> 
-
-                              <!-- LAYER NR. 2 -->
-                              {{-- <div class="tp-caption font-poppins font-white tp-resizeme rs-parallaxlevel-6" id="slide-898-layer-2" style="z-index: 8; white-space: nowrap;"
-                              data-fontsize="['24','24','24','20']" 
-                              data-fontweight="300" 
-                              data-height="none" 
-                              data-lineheight="['40','40','40','40']" 
-                              data-responsive_offset="on" 
-                              data-splitin="none" 
-                              data-splitout="none"
-                              
-                              data-frames='[{"from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":1500,"to":"o:1;","delay":1450,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"y:[100%];","mask":"x:inherit;y:inherit;s:inherit;e:inherit;","ease":"nothing"}]'
-                              
-                              data-whitespace="nowrap" 
-                              data-width="none" 
-                              data-x="['left','left','left','left']" 
-                              data-hoffset="['20','20','20','20']" 
-                              data-y="['center','center','center','center']" 
-                              data-voffset="['60','50','40',20']">
-                                <a style="font-style: italic; text-decoration: underline;" href="{{ route('welcome.event', ["id" => $event->id]) }}">
-                                  Register Here
-                                </a>
-                              </div> --}}                     
                           </li>
                         @endforeach
-                        
-                        {{-- <li data-index="rs-673" data-transition="slidingoverlayhorizontal" data-slotamount="default" data-easein="default" data-easeout="default" data-masterspeed="default" data-thumb="welcome/images/traincover-180x110.jpg" data-rotate="0" data-saveperformance="off" data-title="CREATIVE STUDIO" data-description="">
-                            <!-- MAIN IMAGE -->
-                            <img src="welcome/images/traincover.jpg" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="5" class="rev-slidebg" data-no-retina>
-                            <!-- LAYERS -->
-
-                            <!-- BACKGROUND VIDEO LAYER -->
-                            <div class="rs-background-video-layer" data-forcerewind="on" data-volume="mute" data-videowidth="100%" data-videoheight="100%" data-videomp4="welcome/video/Broadway.mp4" data-videopreload="preload" data-videoloop="loop" data-autoplay="true" data-autoplayonlyfirsttime="false" data-nextslideatend="true"></div>
-
-                            <!-- LAYER NR. 1 -->
-                            <div class="tp-caption   tp-resizeme rs-parallaxlevel-9" id="slide-696-layer-1" 
-                            data-x="['center','center','center','center']" 
-                            data-hoffset="['0','0','0','0']" 
-                            data-y="['middle','middle','middle','middle']" 
-                            data-voffset="['0','0','0','0']" 
-                            data-width="none" 
-                            data-height="none" 
-                            data-whitespace="nowrap" 
-                            
-                            data-type="image" 
-                            data-responsive_offset="on" 
-
-                            data-frames='[{"from":"z:0;rX:0;rY:0;rZ:0;sX:0.8;sY:0.8;skX:0;skY:0;opacity:0;","speed":1500,"to":"o:1;","delay":1850,"ease":"Power4.easeOut"},{"delay":"wait","speed":500,"to":"rZ:0deg;sX:0.7;sY:0.7;opacity:0;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Back.easeIn"}]'
-                            data-textAlign="['left','left','left','left']"
-                            data-paddingtop="[0,0,0,0]"
-                            data-paddingright="[0,0,0,0]"
-                            data-paddingbottom="[0,0,0,0]"
-                            data-paddingleft="[0,0,0,0]"
-
-                            style="z-index: 7;">
-                                <div class="rs-looped rs-pulse" data-easing="Power1.easeInOut" data-speed="3" data-zoomstart="0.98" data-zoomend="1"><img src="welcome/images/dummy.png" alt="creative studio" width="1400" height="1200" data-ww="['700px','700px','700px','350']" data-hh="['600px','600px','600px','300']" data-lazyload="welcome/images/creativestudio.png" data-no-retina>
-                                </div>
-                            </div>
-                        </li> --}}
                     
                     </ul>
                     <div class="tp-bannertimer tp-bottom" style="visibility: hidden !important;"></div>
                 </div>
             </div>
             <!-- END REVOLUTION SLIDER -->
-
-          <!-- SCROLL ICON -->
-{{--           <div class="local-scroll-cont font-white">
-            <a href="#about-us-link" class="scroll-down smooth-scroll">
-              <div class="icon icon-arrows-down"></div>
-            </a>  
-          </div> --}}
           
         </div>
   

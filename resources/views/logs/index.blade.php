@@ -65,7 +65,7 @@
 
 @push('scripts')
 	<script src="{{ asset('js/datatables.min.js') }}"></script>
-	<script src="{{ asset('js/datatables.bundle.min.js') }}"></script>
+	{{-- <script src="{{ asset('js/datatables.bundle.min.js') }}"></script> --}}
 	<script src="{{ asset('js/splide.min.js') }}"></script>
 	{{-- <script src="{{ asset('js/swiper.min.js') }}"></script> --}}
     <script src="https://cdn.tiny.cloud/1/j6hjljyetenwq6iddgak38qqskvfp3f0c9mgqc68lj0rgzab/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>

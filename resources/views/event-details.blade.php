@@ -364,20 +364,20 @@
             
             <!-- ITEMS GRID -->
             <ul class="port-grid port-grid-3 clearfix" id="items-grid">
-              @foreach($allEvent as $event)
+              @foreach($allEvent as $event2)
                 @php
-                  $images = json_decode($event->images);
+                  $images = json_decode($event2->images);
                 @endphp
                 <!-- Item -->
-                <li class="port-item mix {{ $event->category }}">
-                  <a href="{{ route('welcome.event', ["id" => $event->id]) }}">
+                <li class="port-item mix {{ $event2->category }}">
+                  <a href="{{ route('welcome.event', ["id" => $event2->id]) }}">
                     <div class="port-img-overlay">
-                      <img class="port-main-img" src="{{ isset($images[0]) ? "uploads/$event->id/$images[0]" : "images/no-image.png" }}" alt="img" >
+                      <img class="port-main-img" src="{{ isset($images[0]) ? "uploads/$event2->id/$images[0]" : "images/no-image.png" }}" alt="img" >
                     </div>
                     <div class="port-overlay-cont">
                       <div class="port-title-cont2">
-                        <h3>{{ $event->name }}</h3>
-                        <span>{{ $event->category }}</span>
+                        <h3>{{ $event2->name }}</h3>
+                        <span>{{ $event2->category }}</span>
                       </div>
                     </div>
                   </a>
@@ -573,6 +573,7 @@
 
       $('#register').on('click', e => {
         let status = "{{ $event->status }}";
+        console.log(status);
         if(status == "Arranging"){
           Swal.fire({
             icon: "info",
@@ -583,6 +584,12 @@
           Swal.fire({
             icon: "error",
             title: "Sorry.<br>Event has been cancelled",
+          });
+        }
+        else if(status == "Finished"){
+          Swal.fire({
+            icon: "warning",
+            title: "Sorry.<br>Event is already finished.",
           });
         }
       });

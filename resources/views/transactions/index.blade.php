@@ -45,7 +45,7 @@
 @endsection
 
 @push('styles')
-	<link rel="stylesheet" href="{{ asset('css/datatables.min.css') }}">
+	{{-- <link rel="stylesheet" href="{{ asset('css/datatables.min.css') }}"> --}}
 	<link rel="stylesheet" href="{{ asset('css/datatables.bundle.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
 	{{-- <link rel="stylesheet" href="{{ asset('css/swiper.min.css') }}"> --}}

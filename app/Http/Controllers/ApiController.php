@@ -71,7 +71,9 @@ class ApiController extends Controller
 
             $data->load('ticket.event');
             $data->crypt = Crypt::encryptString($data->id);
+            $data->save();
 
+            $temp->decrement('stock');
             echo json_encode($data);
         }
     }

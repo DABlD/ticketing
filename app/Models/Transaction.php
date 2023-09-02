@@ -18,7 +18,8 @@ class Transaction extends Model
         "ticket_id","fname","mname",
         "lname","gender","birthday",
         "contact","email","address",
-        'status','mop','ref'
+        'status','mop','ref',
+        'crypt'
     ];
 
     protected $dates = [

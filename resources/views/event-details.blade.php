@@ -573,7 +573,7 @@
 
       $('#register').on('click', e => {
         let status = "{{ $event->status }}";
-        console.log(status);
+        
         if(status == "Arranging"){
           Swal.fire({
             icon: "info",
@@ -591,6 +591,9 @@
             icon: "warning",
             title: "Sorry.<br>Event is already finished.",
           });
+        }
+        else{
+          getDetails(e);
         }
       });
 
@@ -708,6 +711,8 @@
                                 Contact: ${result.contact}
                                 <br>
                                 Email: ${result.email}
+                                <br>
+                                Status: ${result.status}
                               </h5>
                             </div>
                           </div>

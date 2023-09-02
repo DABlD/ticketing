@@ -35,6 +35,7 @@ class CreateTransactionsTable extends Migration
             $table->string('mop')->nullable();
             $table->string('ref')->nullable();
 
+            $table->string('crypt')->nullable();
             $table->timestamps();
 
             $table->foreign('ticket_id')

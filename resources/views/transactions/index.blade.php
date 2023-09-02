@@ -176,6 +176,56 @@
 			})
 		}
 
+		function payment(id){
+			$.ajax({
+				url: "{{ route('transaction.get') }}",
+				data: {
+					select: '*',
+					where: ['id', id],
+				},
+				success: transaction => {
+					transaction = JSON.parse(transaction)[0];
+
+					Swal.fire({
+						title: "Payment Details",
+						showCancelButton: true,
+						cancelButtonColor: errorColor,
+						confirmButtonColor: successColor,
+						confirmButtonText: "Save",
+						html: `
+			                ${input("mop", "MOP", transaction.mop, 3, 9)}
+							${input("ref", "Ref #", transaction.ref, 3, 9)}
+						`
+					}).then(result => {
+						if(result.value){
+							swal.showLoading();
+
+							let data = {
+								id: id,
+								mop: $('[name="mop"]').val(),
+								ref: $('[name="ref"]').val()
+							};
+
+							if(data.mop != "" && data.ref != "" && transaction.status != "Used"){
+								data = {
+									...data,
+									status: "Paid"
+								}
+							}
+
+							update({
+								url: "{{ route('transaction.update') }}",
+								data: data,
+								message: "Successfully Updated Payment Details"
+							},	() => {
+								reload();
+							});
+						}
+					})
+				}
+			})
+		}
+
 		function updateStatus(id, status){
 			let statuses = {
 				"Paid": "Paid", 

@@ -12,7 +12,7 @@
     <meta name="theme-color" content="#2a2b2f">
     
     <!-- FAVICONS -->
-    <link rel="shortcut icon" href="welcome/images/favicon.png">
+    <link rel="shortcut icon" href="welcome/images/favicon.ico">
     <link rel="apple-touch-icon" href="welcome/images/apple-touch-icon.png">
     <link rel="apple-touch-icon" sizes="72x72" href="welcome/images/apple-touch-icon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="welcome/images/apple-touch-icon-114x114.png">

@@ -134,6 +134,7 @@
 						}
 					},
 				],
+				ordering: false
 				// drawCallback: function(){
 				// 	init();
 				// }
@@ -446,6 +447,38 @@
 					}, () => {
 						reload();
 					})
+				}
+			});
+		}
+
+		function updateStatus(id, status){
+			let statuses = {
+				"Arranging": "Arranging", 
+				"Upcoming": "Upcoming",
+				"Finished": "Finished",
+				"Cancelled": "Cancelled"
+			};
+
+			Swal.fire({
+				html: "Update Status",
+				input: "select",
+				inputOptions: statuses,
+				didOpen: () => {
+					$('.swal2-select').val(status).trigger('change');
+				}
+			}).then(result => {
+				if(result.value && $('.swal2-select').val() != status){
+					swal.showLoading();
+					update({
+						url: "{{ route('event.update') }}",
+						data: {
+							id: id,
+							status: $('.swal2-select').val()
+						},
+						message: "Successfully Updated"
+					},	() => {
+						reload();
+					});
 				}
 			});
 		}

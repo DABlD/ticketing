@@ -6,6 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}" />
         <title>{{ env("APP_NAME") . " | " . $title }}</title>
 
+        <link rel="shortcut icon" href="welcome/images/favicon.ico">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
         <link rel="stylesheet" href="{{ asset('fonts/fontawesome.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/ionicons.min.css') }}">

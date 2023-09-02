@@ -26,7 +26,6 @@
                     				<th>Date</th>
                     				<th>Time</th>
                     				<th>Category</th>
-                    				<th>Tickets Sold</th>
                     				<th>Status</th>
                     				<th>Actions</th>
                     			</tr>
@@ -98,7 +97,6 @@
 					{data: 'date'},
 					{data: 'start_time'},
 					{data: 'category'},
-					{data: 'ticket'},
 					{data: 'status'},
 					{data: 'actions'},
 				],
@@ -117,25 +115,8 @@
 						}
 					},
 					{
-						targets: [8],
+						targets: [7],
 						width: "150px",
-					},
-					{
-						targets: [6],
-						render: ticket => {
-							let string = "";
-
-							if(ticket == null){
-								string = "NOT SET"
-							}
-							else if(ticket){
-								string = `
-									BTN
-								`;
-							}
-
-							return string;
-						}
 					},
 				],
 				ordering: false
@@ -683,6 +664,7 @@
 
 					let ticketString = "";
 					let checked = "";
+					let ids = [];
 
 					if(!result.length){
 						ticketString = `
@@ -693,6 +675,7 @@
 					}
 					else{
 						result.forEach(ticket => {
+							ids.push(ticket.id);
 							ticketString += `
 								<tr>
 									<td>${ticket.id}</td>
@@ -718,6 +701,11 @@
 						html: `
 
 							<div style="height: 40px;">
+								<span class="float-left">
+									Tickets Sold:
+									<span id="ticketSold"></span>
+								</span>
+
 								<a class="float-right btn btn-success btn-sm" data-toggle="tooltip" title="Add Ticket" onclick="addTicket(${id})">
 									<i class="fas fa-plus"></i>
 								</a>
@@ -748,6 +736,18 @@
 						`,
 						width: "80%",
 						didOpen: () => {
+							console.log(ids);
+							$.ajax({
+								url: '{{ route('transaction.get') }}',
+								data: {
+									select: "*",
+									whereIn: ['ticket_id', ids]
+								},
+								success: result => {
+									result = JSON.parse(result);
+									$('#ticketSold').html(result.length);
+								}
+							})
 						}
 					})
 				}

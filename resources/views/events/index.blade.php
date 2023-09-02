@@ -117,6 +117,10 @@
 						}
 					},
 					{
+						targets: [8],
+						width: "150px",
+					},
+					{
 						targets: [6],
 						render: ticket => {
 							let string = "";

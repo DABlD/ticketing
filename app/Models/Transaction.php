@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\TransactionAttribute;
 use App\Models\Ticket;
 
 class Transaction extends Model
 {
+    use TransactionAttribute;
     /**
      * The attributes that are mass assignable.
      *
@@ -16,6 +18,7 @@ class Transaction extends Model
         "ticket_id","fname","mname",
         "lname","gender","birthday",
         "contact","email","address",
+        'status','mop','ref'
     ];
 
     protected $dates = [

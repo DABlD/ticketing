@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{Transaction};
+use App\Models\{Transaction, Event, Log};
 use DB;
 use Auth;
 
 class TransactionController extends Controller
 {
     public function __construct(){
-        $this->table = "transaction";
+        $this->table = "transactions";
     }
 
     public function get(Request $req){
@@ -82,9 +82,13 @@ class TransactionController extends Controller
         $this->log("Deleted Ticket ID: " . $req->id);
     }
 
-    public function index(){
+    public function index($id){
+        $event = Event::find($id);
+        $event->load('tickets');
+
         return $this->_view('index', [
-            'title' => ucfirst($this->table)
+            'title' => ucfirst($this->table),
+            'event' => $event
         ]);
     }
 

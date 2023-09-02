@@ -128,14 +128,7 @@ Route::group([
                 'prefix' => "$cname/"
             ], function () use($cname){
 
-                Route::get("/", ucfirst($cname) . "Controller@index")
-                    ->defaults("sidebar", 1)
-                    ->defaults("icon", "fas fa-dollar")
-                    ->defaults("name", ucfirst($cname) . "s")
-                    ->defaults("roles", array("Admin"))
-                    // ->defaults("group", "Settings")
-                    ->name($cname)
-                    ->defaults("href", "/$cname");
+                Route::get("/list/{id}", ucfirst($cname) . "Controller@index")->name($cname);
 
                 Route::get("get/", ucfirst($cname) . "Controller@get")->name('get');
                 Route::post("store/", ucfirst($cname) . "Controller@store")->name('store');
@@ -171,6 +164,7 @@ Route::group([
                 Route::get("user", ucfirst($cname) . "Controller@user")->name('user');
                 Route::get("event", ucfirst($cname) . "Controller@event")->name('event');
                 Route::get("log", ucfirst($cname) . "Controller@log")->name('log');
+                Route::get("transaction", ucfirst($cname) . "Controller@transaction")->name('transaction');
             }
         );
     }

@@ -31,6 +31,10 @@ class CreateTransactionsTable extends Migration
 
             $table->text('address')->nullable();
 
+            $table->enum('status', ['Unpaid', 'Paid', 'Forfeited', 'Used'])->default('Unpaid');
+            $table->string('mop')->nullable();
+            $table->string('ref')->nullable();
+
             $table->timestamps();
 
             $table->foreign('ticket_id')

@@ -184,6 +184,9 @@ class DatatableController extends Controller
         //     $array = $array->join("$req->join as $alias", "$alias.fid", '=', 'users.id');
         // }
 
+        // SORT
+        $array = $array->orderByDesc('created_at');
+
         $array = $array->get();
 
         // FOR ACTIONS

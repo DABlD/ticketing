@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', "WelcomeController@index")->name("/");
 Route::get('/event-details', "WelcomeController@event")->name("welcome.event");
+Route::get('/verify/{crypt}', "WelcomeController@verify")->name("welcome.verify");
 
 // Route::get('/', function(){
 //    return redirect()->route('login');
@@ -30,6 +31,7 @@ Route::group([
         Route::get("get", ucfirst($cname) . "Controller@get")->name('get');
         Route::post("store", ucfirst($cname) . "Controller@store")->name('store');
         Route::get("verify", ucfirst($cname) . "Controller@verify")->name('verify');
+        Route::post("update", ucfirst($cname) . "Controller@update")->name('update');
     }
 );
 

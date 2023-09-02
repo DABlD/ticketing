@@ -78,6 +78,12 @@ class ApiController extends Controller
     }
 
     public function verify(Request $req){
-        $id = base64_decode(explode('-', $req->crypt)[0]);
+        $id = explode('-', $req->crypt)[0];
+        return redirect()->route('welcome.verify', ["crypt" => $id]);
+    }
+
+    public function update(Request $req){
+        $req->request->add(['updated_at' => now()]);
+        echo DB::table('transactions')->where('id', $req->id)->update(["status" => "Used"]);
     }
 }

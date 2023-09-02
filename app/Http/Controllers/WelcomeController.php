@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{Event, Ticket};
+use App\Models\{Event, Ticket, Transaction};
 
 class WelcomeController extends Controller
 {
@@ -37,6 +37,18 @@ class WelcomeController extends Controller
             'data' => $data,
             'allEvent' => $allEvent,
             'categories' => $categories
+        ]);
+    }
+
+    public function verify($crypt){
+        $id = base64_decode($crypt);
+        $transaction = Transaction::find($id);
+        $event = Ticket::find($transaction->ticket_id)->event;
+
+        return $this->_view('verify', [
+            'title' => "@TTEND | Verification",
+            'transaction' => $transaction,
+            'event' => $event
         ]);
     }
 

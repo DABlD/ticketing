@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="welcome/css/icon-fonts.min.css" > 
     <link rel="stylesheet" href="welcome/css/styles.min.css" >
     <link rel="stylesheet" href="welcome/css/animate.min.css">
+    <link rel="stylesheet" href="css/sweetalert2.min.css">
     
   </head>
   <body>
@@ -177,9 +178,15 @@
                               data-hoffset="['20','20','20','20']" 
                               data-y="['center','center','center','center']" 
                               data-voffset="['60','50','40',20']">
-                                <a style="font-style: italic; text-decoration: underline;" href="{{ route('welcome.event', ["id" => $event->id]) }}">
-                                  Register Here
-                                </a>
+                                @if($event->status == "Arranging")
+                                  <a style="font-style: italic; text-decoration: underline;" onclick="notif('Stay Tuned')">
+                                    Register Here
+                                  </a>
+                                @else
+                                  <a style="font-style: italic; text-decoration: underline;" href="{{ route('welcome.event', ["id" => $event->id]) }}">
+                                    Register Here
+                                  </a>
+                                @endif
                               </div>                            
                           </li>
                         @endforeach
@@ -618,6 +625,18 @@
 
     <!-- jQuery  -->
     <script src="welcome/js/jquery.min.js"></script>
+    <script src="js/sweetalert2.min.js"></script>   
+
+    <script>
+      function notif(message){
+        if(message == "Stay Tuned"){
+          Swal.fire({
+            icon: "info",
+            title: message + ".<br>Tickets are not yet available.",
+          })
+        }
+      }
+    </script>
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="welcome/js/bootstrap.min.js"></script>   

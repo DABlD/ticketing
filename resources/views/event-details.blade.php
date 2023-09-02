@@ -572,6 +572,22 @@
       });
 
       $('#register').on('click', e => {
+        let status = "{{ $event->status }}";
+        if(status == "Arranging"){
+          Swal.fire({
+            icon: "info",
+            title: "Stay Tuned.<br>Tickets are not yet available.",
+          });
+        }
+        else if(status == "Cancelled"){
+          Swal.fire({
+            icon: "error",
+            title: "Sorry.<br>Event has been cancelled",
+          });
+        }
+      });
+
+      function getDetails(e){
         Swal.fire({
           title: "Enter Details",
           width: "70%",
@@ -725,7 +741,7 @@
           }
         });
         // END SWAL
-      });
+      }
 
       function radio(name, value, checked = ""){
           return `

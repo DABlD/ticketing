@@ -712,7 +712,7 @@
                                 <br>
                                 Email: ${result.email}
                                 <br>
-                                Status: ${result.status}
+                                Status: Unpaid
                               </h5>
                             </div>
                           </div>

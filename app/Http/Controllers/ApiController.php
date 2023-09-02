@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 
-use Illuminate\Support\Facades\Crypt;
 use App\Models\{Transaction, Ticket};
 
 class ApiController extends Controller
@@ -70,8 +69,8 @@ class ApiController extends Controller
             $data->address = $req->address;
 
             $data->load('ticket.event');
-            $data->crypt = Crypt::encryptString($data->id);
             $data->save();
+            $data->crypt = base64_encode($data->id) . '-' . bin2hex($data->id);
 
             $temp->decrement('stock');
             echo json_encode($data);
@@ -79,6 +78,6 @@ class ApiController extends Controller
     }
 
     public function verify(Request $req){
-        $id = Crypt::decryptString($req->crypt);
+        $id = base64_decode(explode('-', $req->crypt)[0]);
     }
 }

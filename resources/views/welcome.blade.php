@@ -40,7 +40,7 @@
         
         <!-- HEADER 1 FONT WHITE TRANSPARENT -->
         <div class="header-black-bg"></div> <!-- NEED FOR TRANSPARENT HEADER ON MOBILE -->
-        <header id="nav" class="header header-1 header-black">
+        <header id="nav" class="header header-1 header-black affix">
           <div class="header-wrapper">
           <div class="container-m-30 clearfix">
             <div class="logo-row">

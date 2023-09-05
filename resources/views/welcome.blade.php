@@ -92,7 +92,7 @@
                       
                       <!-- MENU ITEM -->
                       <li>
-                        <a href="#portfolio-link"><div class="main-menu-title">Portfolio</div></a>
+                        <a href="#portfolio-link"><div class="main-menu-title">Events</div></a>
                       </li>
                       
                       <!-- MENU ITEM -->
@@ -157,7 +157,7 @@
                               data-width="none" 
                               data-x="['left','left','left','left']" 
                               data-y="['center','center','center','center']">
-                                <p style="text-shadow: 3px 3px black;">{{ $event->name }}</p>
+                                {{-- <p style="text-shadow: 3px 3px black;">{{ $event->name }}</p> --}}
                               </div> 
 
                               <!-- LAYER NR. 2 -->

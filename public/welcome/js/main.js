@@ -34,18 +34,23 @@ function initMasonry() { var t;
                         t(n).is(".active") && t(n).removeClass("active").children("ul").slideUp(150), t(i).children().last().slideDown(150), t(i).addClass("active") } }) }(), t("#flickr-feeds").length && t("#flickr-feeds").jflickrfeed({ limit: 6, qstrings: { id: "91212552@N07" }, itemTemplate: '<li><a class="lightbox" rel="colorbox" href="{{image}}" title="{{title}}"><img src="{{image_s}}" alt="{{title}}" /></a></li>' }), t("#twitter-feeds").length && t("#twitter-feeds").tweet({ username: "abcgomel", modpath: "./js/twitter/", avatar_size: !1, count: 2, loading_text: "loading tweets..." }), t("#nav").length && l(), t(".mobile-transparent").length && function() { var e = t("#nav");
                 t("#menu-btn").on("click", function() { e.hasClass("transparent-fix") ? e.removeClass("transparent-fix") : e.addClass("transparent-fix") }) }(), t("#items-grid").length && initWorkFilter(), t(".masonry").length && initMasonry(), t(".wow").length && new WOW({ mobile: !1 }).init(), t(".owl-plugin").length && initPageSliders(), t(".mfp-plugin").length && (t("#inline-popups").magnificPopup({ delegate: "a", removalDelay: 500, callbacks: { beforeOpen: function() { this.st.mainClass = this.st.el.attr("data-effect") } }, midClick: !0 }), t(".lightbox").magnificPopup({ type: "image", mainClass: "mfp-3d-unfold", removalDelay: 500, callbacks: { beforeOpen: function() { this.st.image.markup = this.st.image.markup.replace("mfp-figure", "mfp-figure mfp-with-anim") } }, closeOnContentClick: !0, midClick: !0 }), t("a.hinge").magnificPopup({ mainClass: "mfp-with-fade", removalDelay: 1e3, callbacks: { beforeClose: function() { this.content.addClass("hinge") }, close: function() { this.content.removeClass("hinge") } }, midClick: !0 }), t(".popup-gallery").magnificPopup({ delegate: "a", type: "image", tLoading: "Loading image #%curr%...", mainClass: "mfp-3d-unfold", removalDelay: 500, callbacks: { beforeOpen: function() { this.st.image.markup = this.st.image.markup.replace("mfp-figure", "mfp-figure mfp-with-anim") } }, gallery: { enabled: !0, navigateByImgClick: !0, preload: [0, 1] }, image: { tError: '<a href="%url%">The image #%curr%</a> could not be loaded.' } }), t(".popup-gallery2").magnificPopup({ delegate: "a", type: "image", tLoading: "Loading image #%curr%...", mainClass: "mfp-3d-unfold", removalDelay: 500, callbacks: { beforeOpen: function() { this.st.image.markup = this.st.image.markup.replace("mfp-figure", "mfp-figure mfp-with-anim") } }, gallery: { enabled: !0, navigateByImgClick: !0, preload: [0, 1] }, image: { tError: '<a href="%url%">The image #%curr%</a> could not be loaded.' } }), t(".popup-multi-gallery").each(function() { t(this).magnificPopup({ delegate: "a", type: "image", gallery: { enabled: !0 } }) }), t(".popup-youtube, .popup-vimeo, .popup-gmaps").magnificPopup({ type: "iframe", mainClass: "mfp-fade", removalDelay: 160, preloader: !1, fixedContentPos: !1 })), t(".js-height-fullscr").length && initImgHeight(), t(".count-number").length && t(".count-number").appear(function() { var e = t(this);
                 e.countTo({ from: 0, to: e.html(), speed: 1300, refreshInterval: 60 }) }), t("#header-left-nav").length && r(), t("#google-map").length && initMap(), i.resize(function() { t(".equal-height").css("height", "auto").equalHeights(), t("#nav").length && l(), initImgHeight(), r() }); var o = i.width();
-        i.resize(function() { t(this).width() != o && (o = t(this).width(), r()) }) }); var e = t("html"),
+        // i.resize(function() { t(this).width() != o && (o = t(this).width(), r()) }) 
+    }); var e = t("html"),
         i = t(window),
         n = !1,
         a = window.navigator.userAgent,
         o = a.indexOf("MSIE "),
         s = a.indexOf("Trident/");
+    function l() { 
+        var e = t("#nav");
+        // e.affix({ offset: { top: 1 } }), i.width() < 1025 && !t("#nav").hasClass("affix-on-mobile") && (i.off(".affix"), e.removeData("bs.affix").removeClass("affix affix-top affix-bottom")), t("#nav").hasClass("affix-on-mobile") && t(".nav.navbar-nav").css("max-height", t(window).height() - t(".logo-row").height() - 20 + "px") }
 
-        function l(){
-            
+        if(i.width() < 1025){
+            e.affix({ 
+                offset: { top: 1 } 
+            });
         }
-    // function l() { var e = t("#nav");
-    //     e.affix({ offset: { top: 1 } }), i.width() < 1025 && !t("#nav").hasClass("affix-on-mobile") && (i.off(".affix"), e.removeData("bs.affix").removeClass("affix affix-top affix-bottom")), t("#nav").hasClass("affix-on-mobile") && t(".nav.navbar-nav").css("max-height", t(window).height() - t(".logo-row").height() - 20 + "px") }
+    }
 
     function r() { var e = t("#header-left-nav");
         i.width() < 1025 && e.removeClass("in"), i.width() > 1024 && !e.hasClass("in") && e.addClass("in") } /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(navigator.userAgent) ? (n = !0, e.addClass("mobile")) : e.addClass("no-mobile"), 0 !== t(".date-picker").length && t(function() { t(".date-picker").datetimepicker({ format: "DD/MM/YYYY" }) }), 0 !== t(".time-picker").length && t(function() { t(".time-picker").datetimepicker({ format: "LT" }) }), t(function() { var e = t("#mc-embedded-subscribe-form");

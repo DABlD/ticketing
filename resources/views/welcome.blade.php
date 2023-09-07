@@ -27,7 +27,14 @@
     <link rel="stylesheet" href="welcome/css/styles.min.css" >
     <link rel="stylesheet" href="welcome/css/animate.min.css">
     <link rel="stylesheet" href="css/sweetalert2.min.css">
-    
+
+    <style>
+      .regBtn{
+        border: 1px solid black;
+        font-weight: bold !important;
+        font-family: 'Arial';
+      }
+    </style>
   </head>
   <body>
   
@@ -179,11 +186,11 @@
                               data-y="['center','center','center','center']" 
                               data-voffset="['60','50','40',20']">
                                 @if($event->status == "Arranging")
-                                  <a style="font-style: italic; text-decoration: underline;" onclick="notif('Stay Tuned')">
+                                  <a class="btn btn-default regBtn" style="color: #8a303b !important; font-family: 'Arial !important'; font-weight: bold !important;" onclick="notif('Stay Tuned')">
                                     Register Here
                                   </a>
                                 @else
-                                  <a style="font-style: italic; text-decoration: underline;" href="{{ route('welcome.event', ["id" => $event->id]) }}">
+                                  <a class="btn btn-default regBtn" style="color: #8a303b !important; font-family: 'Arial !important'; font-weight: bold !important;" href="{{ route('welcome.event', ["id" => $event->id]) }}">
                                     Register Here
                                   </a>
                                 @endif
@@ -785,6 +792,12 @@
             disableFocusListener: false,
           }
         });
+
+        $('.font-white').removeClass('font-white');
+        $('.tp-caption').css({
+          'border-radius': '5px',
+          'font-size': '15px'
+        })
        
       }); /*ready*/
     </script>

@@ -201,7 +201,7 @@
                               data-whitespace="nowrap" 
                               data-width="none" 
                               data-x="['left','left','left','left']" 
-                              data-hoffset="['-50','-50','-50','-50']" 
+                              data-hoffset="['-150','-150','-150','-150']" 
                               data-y="['center','center','center','center']" 
                               data-voffset="['200','100','150',100']">
                                 @if($event->status == "Arranging")

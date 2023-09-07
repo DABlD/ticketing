@@ -30,9 +30,28 @@
 
     <style>
       .regBtn{
-        border: 1px solid black;
-        font-weight: bold !important;
+        border: 1px solid white;
+/*        font-weight: bold !important;*/
         font-family: 'Arial';
+        font-size: 35px;
+        color: white !important;
+        border-radius: 15px !important;
+        padding: 10px 80px 10px 80px !important;
+        background-color: #fb0908;
+        transition: all .2s ease-in-out !important;
+      }
+
+      .regBtn:hover{
+        transform: scale(1.1);
+        border: 1px solid white !important;
+/*        font-weight: bold !important;*/
+        font-family: 'Arial';
+        font-size: 35px;
+        color: white !important;
+        border-radius: 15px !important;
+        padding: 10px 80px 10px 80px !important;
+        background-color: #fb0908;
+        transition: all .2s ease-in-out !important;
       }
     </style>
   </head>
@@ -184,13 +203,15 @@
                               data-x="['left','left','left','left']" 
                               data-hoffset="['20','20','20','20']" 
                               data-y="['center','center','center','center']" 
-                              data-voffset="['60','50','40',20']">
+                              data-voffset="['300','50','40',20']">
                                 @if($event->status == "Arranging")
-                                  <a class="btn btn-default regBtn" style="color: #8a303b !important; font-family: 'Arial !important'; font-weight: bold !important;" onclick="notif('Stay Tuned')">
+                                  <a class="btn btn-default regBtn" onclick="notif('Stay Tuned')">
+                                    <span class="fa fa-edit"></span>  
                                     Register Here
                                   </a>
                                 @else
-                                  <a class="btn btn-default regBtn" style="color: #8a303b !important; font-family: 'Arial !important'; font-weight: bold !important;" href="{{ route('welcome.event', ["id" => $event->id]) }}">
+                                  <a class="btn btn-default regBtn" href="{{ route('welcome.event', ["id" => $event->id]) }}">
+                                    <span class="fa fa-edit"></span>
                                     Register Here
                                   </a>
                                 @endif

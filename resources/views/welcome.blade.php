@@ -201,9 +201,9 @@
                               data-whitespace="nowrap" 
                               data-width="none" 
                               data-x="['left','left','left','left']" 
-                              data-hoffset="['20','20','20','20']" 
+                              data-hoffset="['-20','-20','-20','-20']" 
                               data-y="['center','center','center','center']" 
-                              data-voffset="['300','50','40',20']">
+                              data-voffset="['250','150','140',120']">
                                 @if($event->status == "Arranging")
                                   <a class="btn btn-default regBtn" onclick="notif('Stay Tuned')">
                                     <span class="fa fa-edit"></span>  

@@ -109,9 +109,9 @@
               <div id="main-menu">
                 <div class="navbar navbar-default" role="navigation">
 
-                  <center>
+                  {{-- <center>
                     <h4 style="color: white; font-size: 50px; text-shadow: 1px 1px black;">{{ $event->name }}</h4>
-                  </center>
+                  </center> --}}
 
                   <!-- MAIN MENU LIST -->
                   <nav class="collapse collapsing navbar-collapse right-1024">

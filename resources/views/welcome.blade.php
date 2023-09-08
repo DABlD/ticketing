@@ -436,7 +436,7 @@
         
         <!-- VIEW MORE PROJECTS  -->
         <div class="port-view-more-cont">
-          <a class="port-view-more" href="portfolio-masonry-4col.html">View All Projects</a>
+          <a class="port-view-more" href="portfolio-masonry-4col.html">View All Activities</a>
         </div>
         <!-- END PORTFOLIO SECTION -->
         

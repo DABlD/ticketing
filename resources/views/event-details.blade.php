@@ -320,7 +320,7 @@
 
                 <div class="row">
                   <div class="col-md-12">
-                    <button class="btn btn-info" id="register">Register Now</button>
+                    <button class="btn btn-info" id="register">Fill Up Form</button>
                   </div>
                 </div>
 

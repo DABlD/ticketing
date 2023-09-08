@@ -238,7 +238,7 @@
                   {{ $event->name }}
                 </h1>
 
-                <div class="row">
+                <div class="row" style="padding-left: 15px">
 
                   <h3>
                   {{-- PRICE --}}

@@ -118,6 +118,12 @@
 						targets: [7],
 						width: "150px",
 					},
+					{
+						targets: [6],
+						render: status => {
+							return status == "Upcoming" ? "Ongoing" : status;
+						}
+					},
 				],
 				ordering: false
 				// drawCallback: function(){

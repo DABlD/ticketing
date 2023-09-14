@@ -91,8 +91,8 @@
 					}
 				},
 				columns: [
-					{data: 'id'},
-					{data: 'name'},
+					{data: 'id'}, 
+					{data: 'name'}, 
 					{data: 'venue'},
 					{data: 'date'},
 					{data: 'start_time'},
@@ -121,7 +121,7 @@
 					{
 						targets: [6],
 						render: status => {
-							return status == "Upcoming" ? "Ongoing" : status;
+							return status == "Ongoing" ? "Upcoming" : status;
 						}
 					},
 				],

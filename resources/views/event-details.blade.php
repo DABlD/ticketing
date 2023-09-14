@@ -156,7 +156,7 @@
                         @foreach($images as $image)
                           <li data-index="rs-{{ $event->id }}" data-transition="slidingoverlayhorizontal" data-slotamount="default" data-easein="default" data-easeout="default" data-masterspeed="default" data-rotate="0" data-saveperformance="off">
                               <!-- MAIN IMAGE -->
-                              <img src="{{ "uploads/$event->id/$image" }}" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="5" class="rev-slidebg" data-no-retina>
+                              <img src="{{ "uploads/$image" }}" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="5" class="rev-slidebg" data-no-retina>
                               <!-- LAYERS -->
 
                               <!-- LAYER NR. 1 -->
@@ -228,7 +228,7 @@
               <!-- IMAGES -->
               <div class="col-md-6 fes9-img-cont clearfix">
                 <div class="fes16-img-center clearfix">
-                  <img src="{{ isset($event->ticket) ? asset("uploads/$event->id/$event->ticket") : asset("images/no-image-portrait.png") }}" alt="img" class="wow fadeInUp" data-wow-delay="150ms" data-wow-duration="1s" style="height: 100%;">
+                  <img src="{{ isset($event->ticket) ? asset("uploads/$event->ticket") : asset("images/no-image-portrait.png") }}" alt="img" class="wow fadeInUp" data-wow-delay="150ms" data-wow-duration="1s" style="height: 100%;">
                 </div>
               </div>
 

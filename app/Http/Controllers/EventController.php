@@ -91,7 +91,7 @@ class EventController extends Controller
             $img = Image::make($file);
             $img->orientate();
 
-            $save_path = public_path().'/uploads/' . $req->id;
+            $save_path = public_path().'/uploads/';
 
             if (!file_exists($save_path)) {
                 mkdir($save_path, 775, true);

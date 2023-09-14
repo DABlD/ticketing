@@ -165,7 +165,7 @@
                           @endphp
                           <li data-index="rs-{{ $event->id }}" data-transition="slidingoverlayhorizontal" data-slotamount="default" data-easein="default" data-easeout="default" data-masterspeed="default" data-rotate="0" data-saveperformance="off">
                               <!-- MAIN IMAGE -->
-                              <img src="{{ isset($images[0]) ? "uploads/$event->id/$images[0]" : "images/no-image.png" }}" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="5" class="rev-slidebg" data-no-retina>
+                              <img src="{{ isset($images[0]) ? "uploads/$images[0]" : "images/no-image.png" }}" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="5" class="rev-slidebg" data-no-retina>
                               <!-- LAYERS -->
 
                               <!-- LAYER NR. 1 -->
@@ -417,7 +417,7 @@
                 <li class="port-item mix {{ $event->category }}">
                   <a href="{{ route('welcome.event', ["id" => $event->id]) }}">
                     <div class="port-img-overlay">
-                      <img class="port-main-img" src="{{ isset($images[0]) ? "uploads/$event->id/$images[0]" : "images/no-image.png" }}" alt="img" >
+                      <img class="port-main-img" src="{{ isset($images[0]) ? "uploads/$images[0]" : "images/no-image.png" }}" alt="img" >
                     </div>
                     <div class="port-overlay-cont">
                       <div class="port-title-cont2">

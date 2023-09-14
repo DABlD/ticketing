@@ -167,7 +167,7 @@
                 plugins: {
                   title: {
                     display: true,
-                    text: 'Chart.js Line Chart - Animation Progress Bar'
+                    text: ''
                   }
                 },
                 scales: {

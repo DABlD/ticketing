@@ -23,8 +23,8 @@
                     				<th>ID</th>
                     				<th>Name</th>
                     				<th>Venue</th>
-                    				<th>Date</th>
-                    				<th>Time</th>
+                    				<th>Start</th>
+                    				<th>End</th>
                     				<th>Category</th>
                     				<th>Status</th>
                     				<th>Actions</th>
@@ -95,7 +95,7 @@
 					{data: 'name'}, 
 					{data: 'venue'},
 					{data: 'date'},
-					{data: 'start_time'},
+					{data: 'end_date'},
 					{data: 'category'},
 					{data: 'status'},
 					{data: 'actions'},
@@ -104,14 +104,16 @@
 				columnDefs: [
 					{
 						targets: [3],
-						render: date => {
-							return moment(date).format("MMM DD, YYYY");
+						render: (date, a, row) => {
+							date = moment(date).format('MM-DD-YYYY');
+							return moment(`${date} ${row.start_time}`, "MM-DD-YYYY h:mm").format("MMM DD, YYYY h:mm A");
 						}
 					},
 					{
 						targets: [4],
-						render: (start,a,row) => {
-							return `${moment(start, 'H:m').format("hh:mm A")} - ${moment(row.end_time, "H:m").format("hh:mm A")}`;
+						render: (end_date, a, row) => {
+							end_date = moment(end_date ?? row.date).format('MM-DD-YYYY');
+							return moment(`${end_date} ${row.end_time}`, "MM-DD-YYYY h:mm").format("MMM DD, YYYY h:mm A");
 						}
 					},
 					{
@@ -191,19 +193,30 @@
 				title: "Enter Event Details",
 				html: `
 	                ${input("name", "Name", null, 3, 9)}
-					${input("date", "Date", null, 3, 9)}
-					<div class="row iRow">
-			            <div class="col-md-3 iLabel">
-			                Start
+
+	                <div class="row iRow">
+                        <div class="col-md-3 iLabel">
+                            Start
+                        </div>
+                        <div class="col-md-5 iInput">
+                            <input type="text" name="date" placeholder="Start Date" class="form-control" value="">
+                        </div>
+			            <div class="col-md-4 iInput">
+			                <input type="text" name="start_time" placeholder="Time" class="form-control">
 			            </div>
-			            <div class="col-md-3 iInput">
-			                <input type="text" name="start_time" placeholder="Enter Start" class="form-control">
+                    </div>
+
+	                <div class="row iRow">
+                        <div class="col-md-3 iLabel">
+                            End
+                        </div>
+                        <div class="col-md-5 iInput">
+                            <input type="text" name="end_date" placeholder="End Date" class="form-control" value="">
+                        </div>
+			            <div class="col-md-4 iInput">
+			                <input type="text" name="end_time" placeholder="Time" class="form-control">
 			            </div>
-			            <div class="col-md-3 iInput">
-			                <input type="text" name="end_time" placeholder="Enter End" class="form-control">
-			            </div>
-			            <div class="col-md-3 iInput"></div>
-			        </div>
+                    </div>
 
 			        <div class="row iRow">
 					    <div class="col-md-3 iLabel">
@@ -232,7 +245,7 @@
 			        </div>
 				`,
 				didOpen: () => {
-					$("[name='date']").flatpickr({
+					$("[name='date'], [name='end_date']").flatpickr({
 						altInput: true,
 						altFormat: "F j, Y",
 						dateFormat: "Y-m-d",
@@ -287,6 +300,7 @@
 						data: {
 							name: $("[name='name']").val(),
 							date: $("[name='date']").val(),
+							end_date: $("[name='end_date']").val(),
 							start_time: $("[name='start_time']").val(),
 							end_time: $("[name='end_time']").val(),
 							category: $("[name='category']").val(),
@@ -318,9 +332,30 @@
 				html: `
 	                ${input("id", "", event.id, 3, 9, 'hidden')}
 	                ${input("name", "Name", event.name, 3, 9)}
-					${input("date", "Description", event.date, 3, 9)}
-					${input("start_time", "Start", event.start_time, 3, 9)}
-					${input("end_time", "End", event.end_time, 3, 9)}
+
+	                <div class="row iRow">
+                        <div class="col-md-3 iLabel">
+                            Start
+                        </div>
+                        <div class="col-md-5 iInput">
+                            <input type="text" name="date" placeholder="Start Date" class="form-control">
+                        </div>
+			            <div class="col-md-4 iInput">
+			                <input type="text" name="start_time" placeholder="Time" class="form-control">
+			            </div>
+                    </div>
+
+	                <div class="row iRow">
+                        <div class="col-md-3 iLabel">
+                            End
+                        </div>
+                        <div class="col-md-5 iInput">
+                            <input type="text" name="end_date" placeholder="End Date" class="form-control" value="">
+                        </div>
+			            <div class="col-md-4 iInput">
+			                <input type="text" name="end_time" placeholder="Time" class="form-control">
+			            </div>
+                    </div>
 
 			        <div class="row iRow">
 					    <div class="col-md-3 iLabel">
@@ -354,7 +389,7 @@
 				cancelButtonColor: errorColor,
 				cancelButtonText: 'Cancel',
 				didOpen: () => {
-					$("[name='date']").flatpickr({
+					$("[name='date'], [name='end_date']").flatpickr({
 						altInput: true,
 						altFormat: "F j, Y",
 						dateFormat: "Y-m-d",
@@ -410,6 +445,7 @@
 							name: $("[name='name']").val(),
 							date: $("[name='date']").val(),
 							start_time: $("[name='start_time']").val(),
+							end_date: $("[name='end_date']").val(),
 							end_time: $("[name='end_time']").val(),
 							category: $("[name='category']").val(),
 							venue: $("[name='venue']").val(),

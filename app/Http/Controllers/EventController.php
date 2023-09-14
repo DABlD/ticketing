@@ -94,7 +94,7 @@ class EventController extends Controller
             $save_path = public_path().'/uploads/' . $req->id;
 
             if (!file_exists($save_path)) {
-                mkdir($save_path, 666, true);
+                mkdir($save_path, 775, true);
             }
 
             $img->save($save_path . '/' . $name);

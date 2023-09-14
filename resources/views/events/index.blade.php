@@ -492,7 +492,7 @@
 						images.forEach(image => {
 							imageString += `
 								<li class="splide__slide">
-									<img src="uploads/${id}/${image}" alt="Pic">
+									<img src="uploads/${image}" alt="Pic">
 								</li>
 							`;
 						});
@@ -768,7 +768,7 @@
 				denyButtonColor: successColor,
      			customClass: 'swal-height',
 				html: `
-					<img id="preview" alt="No image uploaded" src="uploads/${id}/${image}">
+					<img id="preview" alt="No image uploaded" src="uploads/${image}">
 				`,
 			}).then(result => {
 				if(result.isDenied){

@@ -11,12 +11,14 @@ class WelcomeController extends Controller
         $data = Event::where('date', '>=', now())->orderByDesc('date')->get();
         $allEvent = Event::all();
         $categories = $allEvent->pluck('category')->unique();
+        $transactions = Transaction::all();
         
         return $this->_view('welcome', [
             'title' => "@TTEND",
             'data' => $data,
             'allEvent' => $allEvent,
-            'categories' => $categories
+            'categories' => $categories,
+            'transactions' => $transactions
         ]);
     }
 

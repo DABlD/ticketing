@@ -457,7 +457,7 @@
 
               <div class="col-xs-6 col-sm-3 border-none">
                 <div class="count-number">
-                  75
+                  {{ $allEvent->count() }}
                 </div>
                 <div class="count-descr">
                   <span class="count-title">Total Events</span>
@@ -467,7 +467,7 @@
               <!-- Item -->
               <div class="col-xs-6 col-sm-3 border-none">
                 <div class="count-number">
-                 450
+                 {{ $transactions->count() }}
                 </div>
                 <div class="count-descr">
                   <span class="count-title">Total Attendees</span>

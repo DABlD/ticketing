@@ -338,10 +338,10 @@
                             Start
                         </div>
                         <div class="col-md-5 iInput">
-                            <input type="text" name="date" placeholder="Start Date" class="form-control">
+                            <input type="text" name="date" placeholder="Start Date" class="form-control" value="${event.date}">
                         </div>
 			            <div class="col-md-4 iInput">
-			                <input type="text" name="start_time" placeholder="Time" class="form-control">
+			                <input type="text" name="start_time" placeholder="Time" class="form-control" value="${event.start_time}">
 			            </div>
                     </div>
 
@@ -350,10 +350,10 @@
                             End
                         </div>
                         <div class="col-md-5 iInput">
-                            <input type="text" name="end_date" placeholder="End Date" class="form-control" value="">
+                            <input type="text" name="end_date" placeholder="End Date" class="form-control" value="${event.end_date}">
                         </div>
 			            <div class="col-md-4 iInput">
-			                <input type="text" name="end_time" placeholder="Time" class="form-control">
+			                <input type="text" name="end_time" placeholder="Time" class="form-control" value="${event.end_time}">
 			            </div>
                     </div>
 

@@ -120,10 +120,10 @@ class EventController extends Controller
         $img = Image::make($file)->encode('jpg');
         $img->orientate();
 
-        $save_path = public_path().'/uploads/' . $req->id;
+        $save_path = public_path().'/uploads/';
 
         if (!file_exists($save_path)) {
-            mkdir($save_path, 666, true);
+            mkdir($save_path, 775, true);
         }
 
         $img->save($save_path . '/' . $name);

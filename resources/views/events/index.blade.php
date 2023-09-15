@@ -186,7 +186,7 @@
 		}
 
 		function create2(categories){
-			categories.push("Concert", "Music Festival", "Workshop", "Bazaar", "Charity", "Product Launch");
+			categories.push("Concert", "Music Festival", "Workshop", "Bazaar", "Charity", "Product Launch", "Convention", "Seminar", "Exhibit", "Show");
 			categories = [...new Set(categories)];
 
 			Swal.fire({
@@ -324,7 +324,7 @@
 		}
 
 		function showDetails(event, categories){
-			categories.push("Concert", "Music Festival", "Workshop", "Bazaar", "Charity", "Product Launch");
+			categories.push("Concert", "Music Festival", "Workshop", "Bazaar", "Charity", "Product Launch", "Convention", "Seminar", "Exhibit", "Show");
 			categories = [...new Set(categories)];
 
 			Swal.fire({

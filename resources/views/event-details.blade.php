@@ -299,10 +299,8 @@
                   <div class="col-md-1">
                     <i class='fas fa-calendar-day fa-2x'></i>
                   </div>
-                  <div class="col-md-6">
-                    {{ now()->parse($event->date)->format("F j, Y") }}
-                    <br>
-                    {{ now()->parse($event->start_time)->format("h:i A") }} - {{ now()->parse($event->end_time)->format("h:i A") }}
+                  <div class="col-md-11">
+                    {{ now()->parse($event->date)->format("F j, Y") }} {{ now()->parse($event->start_time)->format("h:i A") }} - {{ now()->parse($event->end_date)->format("F j, Y") }} {{ now()->parse($event->end_time)->format("h:i A") }}
                   </div>
                 </div>
                 <br>

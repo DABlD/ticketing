@@ -283,7 +283,7 @@
                     ABOUT US
                   </b></h1>
 
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula nulla sem, at tempus dui convallis vitae, Phasellus sollicitudin turpis mauris, posuere ultrices purus tristique sed.
+                  Attend was created to provide an alternative solution for registration procedures. To provide real time and efficient registration process, capturing all necessary information required by the Host Organizer.
                 </div>
               </div>
 
@@ -294,14 +294,14 @@
                     Hassle free, Real time Registration Platform
                   </h2>
 
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula nulla sem, at tempus dui convallis vitae, Phasellus sollicitudin turpis mauris, posuere ultrices purus tristique sed.
+                  Using "attend", guest or attendees can easily register anytime and anywhere, making the whole process systematic and convenient.
 
 
                   <h2>
                     Pre register ahead and create your digital Pass
                   </h2>
 
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula nulla sem, at tempus dui convallis vitae, Phasellus sollicitudin turpis mauris, posuere ultrices purus tristique sed.
+                  Attend generates QR code to serve as a digital Entry Pass or Ticket for the attendees, making the event secure plus providing real time assessment data with regard to the event's purpose.
                 </div>
 
 
@@ -330,7 +330,7 @@
                   OUR SERVICES
                 </b></h1>
 
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula nulla sem, at tempus dui convallis vitae, Phasellus sollicitudin turpis mauris, posuere ultrices purus tristique sed.
+                Facilitate and organizes event registrations digitally. From pre-registration process to providing digital access pass / entry for the guests till verification and confirmation of registered attendees during the event itself.
               </div>
             </div>
 
@@ -368,7 +368,7 @@
                   </div>
                 </div>
 
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula nulla sem, at tempus dui convallis vitae, Phasellus sollicitudin turpis mauris, posuere ultrices purus tristique sed.
+                Easy, Systematic Digital Registration for events such as exhibits, conventions, programs or shows and many others.
               </div>
             </div>
 
@@ -519,7 +519,7 @@
                   </div>
                   <div class="cis-text">
                     <h3>Address</h3>
-                    <p>Metro manila</p>
+                    <p>Las Pinas</p>
                   </div>
                 </div>
               </div>
@@ -530,7 +530,7 @@
                   </div>
                   <div class="cis-text">
                     <h3>Email</h3>
-                    <p><a href="mailto:info@attend.com">info@attend.com</a></p>
+                    <p><a href="mailto:info@attend.com">iqcorporatesales@gmail.com</a></p>
                   </div>
                 </div>
               </div>
@@ -541,7 +541,7 @@
                   </div>
                   <div class="cis-text">
                     <h3>Call Us</h3>
-                    <p>+63 8765 1234 / +63 987 6543 210</p>
+                    <p>0906 483 0620</p>
                   </div>
                 </div>
               </div>

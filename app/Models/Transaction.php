@@ -19,7 +19,7 @@ class Transaction extends Model
         "lname","gender","birthday",
         "contact","email","address",
         'status','mop','ref',
-        'crypt'
+        'crypt','company', 'position'
     ];
 
     protected $dates = [

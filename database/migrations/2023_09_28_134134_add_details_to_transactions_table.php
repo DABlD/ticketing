@@ -14,8 +14,8 @@ class AddDetailsToTransactionsTable extends Migration
     public function up()
     {
         Schema::table('transactions', function (Blueprint $table) {
-            $table->string('company')->nullable();
-            $table->string('position')->nullable();
+            $table->string('company')->after('crypt')->nullable();
+            $table->string('position')->after('crypt')->nullable();
         });
     }
 

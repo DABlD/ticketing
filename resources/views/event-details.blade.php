@@ -613,11 +613,9 @@
                     Gender
                 </div>
                 <div class="col-md-10 iInput" style="margin-top: 5px;">
-                    <div class="col-md-1 iInput">
-                        ${radio("gender", "Male", "checked")}
-                    </div>
-                    <div class="col-md-1 iInput">
-                        ${radio("gender", "Female")}
+                    <div class="col-md-6 iInput">
+                        ${radio2("gender", "Male", "checked")}
+                        ${radio2("gender", "Female")}
                     </div>
                 </div>
             </div></br>
@@ -626,6 +624,8 @@
             ${input("contact", "Contact", null, 2,10)}
             ${input("email2", "Email", null, 2, 10, 'email')}
             ${input("address", "Address", null, 2, 10)}
+            ${input("company", "Company", null, 2, 10)}
+            ${input("position", "Position", null, 2, 10)}
           `,
           didOpen: () => {
             $("[name='birthday']").flatpickr({
@@ -665,6 +665,8 @@
                 contact: $("[name='contact']").val(),
                 email: $("[name='email2']").val(),
                 address: $("[name='address']").val(),
+                company: $("[name='company']").val(),
+                position: $("[name='position']").val(),
 
                 _token: $('meta[name="csrf-token"]').attr('content')
               },
@@ -710,6 +712,10 @@
                                 <br>
                                 Email: ${result.email}
                                 <br>
+                                Company: ${result.company}
+                                <br>
+                                Position: ${result.position}
+                                <br>
                                 Status: Unpaid
                               </h5>
                             </div>
@@ -753,10 +759,10 @@
         // END SWAL
       }
 
-      function radio(name, value, checked = ""){
+      function radio2(name, value, checked = ""){
           return `
               <input type="radio" name="${name}" value="${value}" ${checked}>
-              <label for="${name}">${value}</label><br>
+              <label for="${name}">${value}</label>
           `;
       }
     </script>

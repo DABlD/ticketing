@@ -70,6 +70,8 @@ class TransactionController extends Controller
         $data->contact = $req->contact;
         $data->email = $req->email;
         $data->address = $req->address;
+        $data->company = $req->company;
+        $data->position = $req->position;
 
         echo $data->save();
 

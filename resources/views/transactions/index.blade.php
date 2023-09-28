@@ -25,7 +25,8 @@
                     				<th>Sex</th>
                     				<th>DOB</th>
                     				<th>Contact</th>
-                    				<th>Email</th>
+                    				<th>Company</th>
+                    				<th>Position</th>
                     				<th>Status</th>
                     				<th>Actions</th>
                     			</tr>
@@ -87,7 +88,8 @@
 					{data: 'gender'},
 					{data: 'birthday'},
 					{data: 'contact'},
-					{data: 'email'},
+					{data: 'company'},
+					{data: 'position'},
 					{data: 'status'},
 					{data: 'actions'},
 				],
@@ -168,6 +170,24 @@
 					            </div>
 					            <div class="col-md-9 bb">
 					                ${transaction.address}
+					            </div>
+					        </div>
+
+							<div class="row iRow">
+					            <div class="col-md-3 bb">
+					                Company
+					            </div>
+					            <div class="col-md-9 bb">
+					                ${transaction.company}
+					            </div>
+					        </div>
+
+							<div class="row iRow">
+					            <div class="col-md-3 bb">
+					                Position
+					            </div>
+					            <div class="col-md-9 bb">
+					                ${transaction.position}
 					            </div>
 					        </div>
 						`

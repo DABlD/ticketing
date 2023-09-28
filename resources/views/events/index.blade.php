@@ -695,7 +695,7 @@
 		}
 
 		// TICKETS
-		function viewTickets(id, ticketImage){
+		function viewTickets(id){
 			$.ajax({
 				url: '{{ route('ticket.get') }}',
 				data: {
@@ -729,7 +729,7 @@
 									<td>${ticket.sale_price ? "₱" + ticket.sale_price : "-"}</td>
 									<td>${ticket.sale_until ? toDate(ticket.sale_until) : "-"}</td>
 									<td>
-										<a class="btn btn-success" data-toggle="tooltip" title="Edit" onclick="editTicket(${id}, ${ticket.id}, '${ticketImage}')">
+										<a class="btn btn-success" data-toggle="tooltip" title="Edit" onclick="editTicket(${id}, ${ticket.id}">
 											<i class="fas fa-pencil"></i>
 										</a>
 									</td>
@@ -749,10 +749,17 @@
 								</span>
 
 								<a class="float-right btn btn-success btn-sm" data-toggle="tooltip" title="Add Ticket" onclick="addTicket(${id})">
+									Add Ticket 
 									<i class="fas fa-plus"></i>
 								</a>
 
-								<a class="float-right btn btn-info btn-sm" data-toggle="tooltip" title="Upload Image" onclick="ticketImage(${id}, '${ticketImage}')" style="margin-right: 5px;">
+								<a class="float-right btn btn-primary btn-sm" data-toggle="tooltip" title="Upload ID Layout" onclick="idLayout(${id})" style="margin-right: 5px;">
+									ID Layout 
+									<i class="fas fa-image"></i>
+								</a>
+
+								<a class="float-right btn btn-info btn-sm" data-toggle="tooltip" title="Upload Image" onclick="ticketImage(${id})" style="margin-right: 5px;">
+									Ticket Image 
 									<i class="fas fa-image"></i>
 								</a>
 							</div>
@@ -796,78 +803,89 @@
 			})
 		}
 
-		function ticketImage(id, image = null){
-			Swal.fire({
-				title: "View Images",
-				showDenyButton: true,
-				denyButtonText: 'Upload Image',
-				denyButtonColor: successColor,
-     			customClass: 'swal-height',
-				html: `
-					<img id="preview" alt="No image uploaded" src="uploads/${image}">
-				`,
-			}).then(result => {
-				if(result.isDenied){
+		function ticketImage(id){
+			$.ajax({
+				url: '{{ route('event.get') }}',
+				data: {
+					select: ['image', 'layout'],
+					where: ['id', id]
+				},
+				success: result => {
+					result = JSON.parse(result)[0];
+
 					Swal.fire({
-						title: "Upload Image",
-						input: "file",
-						inputAttributes: {
-							'accept': 'image/*'
-						},
+						title: "View Images",
+						showDenyButton: true,
+						denyButtonText: 'Upload Image',
+						denyButtonColor: successColor,
+		     			customClass: 'swal-height',
 						html: `
-							<img id="preview">
+							<img id="preview" alt="No image uploaded" src="uploads/${result.ticket}">
 						`,
-						showCancelButton: true,
-						cancelButtonColor: errorColor,
-						confirmButtonText: "Upload",
-						preConfirm: () => {
-						    swal.showLoading();
-						    return new Promise(resolve => {
-						    	let bool = true;
+					}).then(result => {
+						if(result.isDenied){
+							Swal.fire({
+								title: "Upload Image",
+								input: "file",
+								inputAttributes: {
+									'accept': 'image/*'
+								},
+								html: `
+									<img id="preview">
+								`,
+								showCancelButton: true,
+								cancelButtonColor: errorColor,
+								confirmButtonText: "Upload",
+								preConfirm: () => {
+								    swal.showLoading();
+								    return new Promise(resolve => {
+								    	let bool = true;
 
-					            if($('.swal2-file').val().length == 0){
-					                Swal.showValidationMessage('No Image Selected');
-					            }
-					            else{
-					            	let bool = false;
-					            }
+							            if($('.swal2-file').val().length == 0){
+							                Swal.showValidationMessage('No Image Selected');
+							            }
+							            else{
+							            	let bool = false;
+							            }
 
-					            bool ? setTimeout(() => {resolve()}, 500) : "";
-						    });
-						},
-						didOpen: () => {
-							$('.swal2-file').on('change', e => {
-								let fileInput = e.target;
-								
-								if(!$('#preview').is(':visible'))
-								{
-								    $('#preview').fadeIn();
+							            bool ? setTimeout(() => {resolve()}, 500) : "";
+								    });
+								},
+								didOpen: () => {
+									$('.swal2-file').on('change', e => {
+										let fileInput = e.target;
+										
+										if(!$('#preview').is(':visible'))
+										{
+										    $('#preview').fadeIn();
+										}
+
+										var fr = new FileReader();
+										fr.readAsDataURL(document.getElementsByClassName("swal2-file")[0].files[0]);
+
+										fr.onload = function (e) {
+										    document.getElementById("preview").src = e.target.result;
+										};
+									});
 								}
+							}).then(result2 => {
+								if(result2.value){
+						            swal.showLoading();
 
-								var fr = new FileReader();
-								fr.readAsDataURL(document.getElementsByClassName("swal2-file")[0].files[0]);
+						            let formData = new FormData();
+						            formData.append('id', id);
 
-								fr.onload = function (e) {
-								    document.getElementById("preview").src = e.target.result;
-								};
+						            formData.append(`image`, $('.swal2-file').prop('files')[0]);
+						            formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+
+									uploadTicketImage(formData, id);
+								}
+								// showImages(id, imageString);
 							});
 						}
-					}).then(result2 => {
-						if(result2.value){
-				            swal.showLoading();
-
-				            let formData = new FormData();
-				            formData.append('id', id);
-
-				            formData.append(`image`, $('.swal2-file').prop('files')[0]);
-				            formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
-
-							uploadTicketImage(formData, id);
-						}
-						// showImages(id, imageString);
 					});
 				}
-			});
+			})
 		}
 
 		function addTicket(id){

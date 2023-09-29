@@ -694,6 +694,20 @@
 		    });
 		}
 
+		async function uploadIDLayout(formData, id){
+		    await fetch('{{ route('event.uploadIDLayout') }}', {
+		        method: "POST", 
+		        body: formData,
+		    }).then(result => {
+		        console.log(result);
+		        ss("Successfully Uploaded Image", "Refreshing");
+		        setTimeout(() => {
+		            // window.location.reload();
+		            viewTickets(id);
+		        }, 1200);
+		    });
+		}
+
 		// TICKETS
 		function viewTickets(id){
 			$.ajax({
@@ -807,20 +821,20 @@
 			$.ajax({
 				url: '{{ route('event.get') }}',
 				data: {
-					select: ['image', 'layout'],
+					select: ['ticket', 'layout'],
 					where: ['id', id]
 				},
 				success: result => {
 					result = JSON.parse(result)[0];
 
 					Swal.fire({
-						title: "View Images",
+						title: "View Image",
 						showDenyButton: true,
 						denyButtonText: 'Upload Image',
 						denyButtonColor: successColor,
 		     			customClass: 'swal-height',
 						html: `
-							<img id="preview" alt="No image uploaded" src="uploads/${result.ticket}">
+							<img id="preview" alt="No image uploaded" src="uploads/${result.ticket}" width="100%">
 						`,
 					}).then(result => {
 						if(result.isDenied){
@@ -831,7 +845,7 @@
 									'accept': 'image/*'
 								},
 								html: `
-									<img id="preview">
+									<img id="preview" width="100%">
 								`,
 								showCancelButton: true,
 								cancelButtonColor: errorColor,
@@ -879,6 +893,91 @@
 						            formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
 
 									uploadTicketImage(formData, id);
+								}
+								// showImages(id, imageString);
+							});
+						}
+					});
+				}
+			})
+		}
+
+		function idLayout(id){
+			$.ajax({
+				url: '{{ route('event.get') }}',
+				data: {
+					select: ['ticket', 'layout'],
+					where: ['id', id]
+				},
+				success: result => {
+					result = JSON.parse(result)[0];
+
+					Swal.fire({
+						title: "View Image",
+						showDenyButton: true,
+						denyButtonText: 'Upload Image',
+						denyButtonColor: successColor,
+		     			customClass: 'swal-height',
+						html: `
+							<img id="preview" alt="No image uploaded" src="uploads/${result.layout}" width="100%">
+						`,
+					}).then(result => {
+						if(result.isDenied){
+							Swal.fire({
+								title: "Upload Image",
+								input: "file",
+								inputAttributes: {
+									'accept': 'image/*'
+								},
+								html: `
+									<img id="preview" width="100%">
+								`,
+								showCancelButton: true,
+								cancelButtonColor: errorColor,
+								confirmButtonText: "Upload",
+								preConfirm: () => {
+								    swal.showLoading();
+								    return new Promise(resolve => {
+								    	let bool = true;
+
+							            if($('.swal2-file').val().length == 0){
+							                Swal.showValidationMessage('No Image Selected');
+							            }
+							            else{
+							            	let bool = false;
+							            }
+
+							            bool ? setTimeout(() => {resolve()}, 500) : "";
+								    });
+								},
+								didOpen: () => {
+									$('.swal2-file').on('change', e => {
+										let fileInput = e.target;
+										
+										if(!$('#preview').is(':visible'))
+										{
+										    $('#preview').fadeIn();
+										}
+
+										var fr = new FileReader();
+										fr.readAsDataURL(document.getElementsByClassName("swal2-file")[0].files[0]);
+
+										fr.onload = function (e) {
+										    document.getElementById("preview").src = e.target.result;
+										};
+									});
+								}
+							}).then(result2 => {
+								if(result2.value){
+						            swal.showLoading();
+
+						            let formData = new FormData();
+						            formData.append('id', id);
+
+						            formData.append(`image`, $('.swal2-file').prop('files')[0]);
+						            formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+
+									uploadIDLayout(formData, id);
 								}
 								// showImages(id, imageString);
 							});

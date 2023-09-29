@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', "WelcomeController@index")->name("/");
 Route::get('/event-details', "WelcomeController@event")->name("welcome.event");
 Route::get('/verify/{crypt}', "WelcomeController@verify")->name("welcome.verify");
+Route::get('/showID', "WelcomeController@showID")->name("welcome.showID");
 
 // Route::get('/', function(){
 //    return redirect()->route('login');
@@ -107,6 +108,7 @@ Route::group([
                 Route::post("update/", ucfirst($cname) . "Controller@update")->name('update');
                 Route::post("uploadImages/", ucfirst($cname) . "Controller@uploadImages")->name('uploadImages');
                 Route::post("uploadTicketImage/", ucfirst($cname) . "Controller@uploadTicketImage")->name('uploadTicketImage');
+                Route::post("uploadIDLayout/", ucfirst($cname) . "Controller@uploadIDLayout")->name('uploadIDLayout');
             }
         );
 

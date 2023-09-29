@@ -39,7 +39,6 @@
 				</span>
 
 				<br>
-
 					<div class="row">
 						<div class="col-md-12" style="font-size: 20px;">
 							Ticket ID: {{ $transaction->id }}-{{ now()->timestamp }}
@@ -84,6 +83,18 @@
 
 					<div class="row">
 						<div class="col-md-12" style="font-size: 20px;">
+							Company: {{ $transaction->company }}
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-12" style="font-size: 20px;">
+							Position: {{ $transaction->position }}
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-12" style="font-size: 20px;">
 							Status: {{ $transaction->status }}
 						</div>
 					</div>
@@ -98,6 +109,12 @@
 						<div class="container-login100-form-btn">
 							<button class="login100-form-btn" style="width: 30%;" onclick="payFirst()">
 								Check In
+							</button>
+						</div>
+					@elseif($transaction->status == "Used")
+						<div class="container-login100-form-btn">
+							<button class="login100-form-btn" style="width: 30%;" href="{{ route('welcome.showID', ['id' => $transaction->id]) }}">
+								Show ID
 							</button>
 						</div>
 					@endif
@@ -139,6 +156,27 @@
 					});
 				}
 			})
+		}
+
+		function showID(id){
+			// let layout = "{{ $event->layout }}";
+			// Swal.fire({
+			// 	html: `
+			// 		<canvas id="id" style="width: 500px; height: 250px"></canvas>
+			// 	`,
+			// 	didOpen: () => {
+			// 		var image = new Image();
+			// 		image.src = `{{ asset('uploads/${layout}') }}`;
+
+			// 		image.onload = () => {
+			// 			var pic = document.getElementById("id");
+			// 			pic.getContext('2d').drawImage(image, 0, 0, 600, 50);
+			// 		}
+			// 	},
+			// 	width: "80%",
+			// 	// height: "80vh"
+			// })
+			// window.location = "{{ route('welcome.showID') }}"
 		}
 
 		function payFirst(){

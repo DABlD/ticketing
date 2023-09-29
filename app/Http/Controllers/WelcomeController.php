@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\{Event, Ticket, Transaction};
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class WelcomeController extends Controller
 {
@@ -40,6 +41,18 @@ class WelcomeController extends Controller
             'allEvent' => $allEvent,
             'categories' => $categories
         ]);
+    }
+
+    public function showID(Request $req){
+        $transaction = Transaction::find($req->id);
+        $event = Ticket::find($transaction->ticket_id)->event;
+
+        $data = [];
+        $data['transaction'] = $transaction;
+        $data['event'] = $event;
+
+        $pdf = Pdf::loadView('pdf.id', $data);
+        return $pdf->download('id.pdf');
     }
 
     public function verify($crypt){

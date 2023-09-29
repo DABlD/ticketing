@@ -52,7 +52,7 @@ class WelcomeController extends Controller
         $data['event'] = $event;
 
         $pdf = Pdf::loadView('pdf.id', $data);
-        return $pdf->download('id.pdf');
+        return $pdf->download("Event#$event->id" . "-$transaction->lname" . "_$transaction->fname.pdf");
     }
 
     public function verify($crypt){

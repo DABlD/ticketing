@@ -113,9 +113,9 @@
 						</div>
 					@elseif($transaction->status == "Used")
 						<div class="container-login100-form-btn">
-							<button class="login100-form-btn" style="width: 30%;" href="{{ route('welcome.showID', ['id' => $transaction->id]) }}">
+							<a class="login100-form-btn" style="width: 30%;" href="{{ route('welcome.showID', ['id' => $transaction->id]) }}">
 								Download ID
-							</button>
+							</a>
 						</div>
 					@endif
 			</div>

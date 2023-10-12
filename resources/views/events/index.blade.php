@@ -743,7 +743,7 @@
 									<td>${ticket.sale_price ? "₱" + ticket.sale_price : "-"}</td>
 									<td>${ticket.sale_until ? toDate(ticket.sale_until) : "-"}</td>
 									<td>
-										<a class="btn btn-success" data-toggle="tooltip" title="Edit" onclick="editTicket(${id}, ${ticket.id}">
+										<a class="btn btn-success" data-toggle="tooltip" title="Edit" onclick="editTicket(${id}, ${ticket.id})">
 											<i class="fas fa-pencil"></i>
 										</a>
 									</td>

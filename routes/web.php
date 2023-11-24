@@ -20,9 +20,11 @@ Route::get('/event-details', "WelcomeController@event")->name("welcome.event");
 Route::get('/verify/{crypt}', "WelcomeController@verify")->name("welcome.verify");
 Route::get('/showID', "WelcomeController@showID")->name("welcome.showID");
 
-// Route::get('/', function(){
-//    return redirect()->route('login');
-// });
+Route::get('/test', "WelcomeController@test");
+
+Route::get('/phpinfo', function(){
+   phpinfo();
+});
 
 $cname = "api";
 Route::group([

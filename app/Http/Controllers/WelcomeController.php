@@ -6,8 +6,20 @@ use Illuminate\Http\Request;
 use App\Models\{Event, Ticket, Transaction};
 use Barryvdh\DomPDF\Facade\Pdf;
 
+use Mail;
+use App\Mail\TestMail;
+
 class WelcomeController extends Controller
 {
+    public function test(){
+        $data = [
+            'title' => 'this is a test email',
+            'body' => 'yes'
+        ];
+
+        echo Mail::to('darm.111220@gmail.com')->send(new TestMail($data));
+    }
+
     public function index(){
         $data = Event::where('date', '>=', now())->orderByDesc('date')->get();
         $allEvent = Event::all();

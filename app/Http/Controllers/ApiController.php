@@ -7,6 +7,9 @@ use DB;
 
 use App\Models\{Transaction, Ticket};
 
+use Mail;
+use App\Mail\TestMail;
+
 class ApiController extends Controller
 {
     public function get(Request $req){
@@ -75,6 +78,8 @@ class ApiController extends Controller
             $data->crypt = base64_encode($data->id) . '-' . bin2hex($data->id);
 
             $temp->decrement('stock');
+
+            Mail::to($data->email)->send(new TestMail($data));
             echo json_encode($data);
         }
     }

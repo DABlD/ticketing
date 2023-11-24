@@ -7,6 +7,9 @@ use App\Models\{Transaction, Event, Log};
 use DB;
 use Auth;
 
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\Report;
+
 class TransactionController extends Controller
 {
     public function __construct(){
@@ -95,8 +98,17 @@ class TransactionController extends Controller
 
         return $this->_view('index', [
             'title' => ucfirst($this->table),
-            'event' => $event
+            'event' => $event,
+            'id' => $id
         ]);
+    }
+
+    public function export(Request $req){
+        $data = Transaction::where('ticket_id', $req->id)->get();
+        $event = Event::find($req->id);
+
+        $title = "Transactions for event $event->name";
+        return Excel::download(new Report($data), $title . ".xlsx");
     }
 
     public function log($action = ""){

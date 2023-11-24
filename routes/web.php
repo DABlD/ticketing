@@ -137,6 +137,7 @@ Route::group([
                 Route::get("/list/{id}", ucfirst($cname) . "Controller@index")->name($cname);
 
                 Route::get("get/", ucfirst($cname) . "Controller@get")->name('get');
+                Route::get("export/", ucfirst($cname) . "Controller@export")->name('export');
                 Route::post("store/", ucfirst($cname) . "Controller@store")->name('store');
                 Route::post("update/", ucfirst($cname) . "Controller@update")->name('update');
             }

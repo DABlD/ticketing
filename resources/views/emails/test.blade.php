@@ -6,6 +6,8 @@
 		{{-- <img src="data:image/png;base64, {{ base64_encode(QrCode::size(300)->format('png')->generate(route("api.verify") . '?crypt=' . $data->crypt)) }} "> --}}
 		<img height="100" width="100" src="data:image/png;base64, {{ base64_encode(QrCode::format('png')->size(100)->generate('Make me into an QrCode!')) }} ">
 
+		data:image/png;base64, {{ base64_encode(QrCode::format('png')->size(100)->generate('Make me into an QrCode!')) }}
+
 		<br>
         Event: {{ $data->ticket->event->name }}
         <br>

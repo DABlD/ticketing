@@ -3,8 +3,9 @@
 		<title>@TTEND RESERVATION CONFIRMATION</title>
 	</head>
 	<body>
-		{{ QrCode::size(300)->format('png')->generate(route("api.verify") . '?crypt=' . $data->crypt) }}
+		{!! QrCode::size(300)->format('png')->generate(route("api.verify") . '?crypt=' . $data->crypt) !!}
 
+		<br>
         Event: {{ $data->ticket->event->name }}
         <br>
         Ticket Type: {{ $data->ticket->type }}
